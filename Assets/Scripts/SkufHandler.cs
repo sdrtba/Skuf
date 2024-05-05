@@ -8,18 +8,18 @@ public class SkufHandler : MonoBehaviour
     [SerializeField] private Slider scoreSlider;
     [SerializeField] private Slider hungerSlider;
     [SerializeField] private Text moneyText;
-    
-    private int score;
-    private int hunger;
-    private int money;
+
+    public int score;
+    public int hunger;
+    public int money;
 
     private int _maxScore = 600;
-    private int _maxHunger = 100;
+    private int _maxHunger = 150;
 
     private int _minScore = 0;
     private int _minHunger = 0;
 
-    
+
 
     void Start()
     {
@@ -72,25 +72,25 @@ public class SkufHandler : MonoBehaviour
         }
     }
 
-    private void ChangeScore(int count)
+    public void ChangeScore(int count)
     {
-        if (score + count <= 600 && score + count >= 0)
+        if (score + count <= _maxScore && score + count >= _minHunger)
         {
             score += count;
             scoreSlider.value = score;
         }
     }
 
-    private void ChangeHunger(int count)
+    public void ChangeHunger(int count)
     {
-        if (hunger + count <= 100 && hunger + count >= 0)
+        if (hunger + count <= _maxHunger && hunger + count >= _minHunger)
         {
             hunger += count;
             hungerSlider.value = hunger;
         }
     }
 
-    private void ChangeMoney(int count)
+    public void ChangeMoney(int count)
     {
         if (money + count >= 0)
         {
