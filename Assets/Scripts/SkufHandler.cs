@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +13,18 @@ public class SkufHandler : MonoBehaviour
     public int score;
     public int hunger;
     public int money;
+    public int bearCount;
+    public int foodCount;
 
-    private int _maxScore = 600;
-    private int _maxHunger = 150;
+    public int maxScore = 600;
+    public int maxHunger = 150;
+    public int minScore = 0;
+    public int minHunger = 0;
 
-    private int _minScore = 0;
-    private int _minHunger = 0;
+    public bool isBirdActive = true;
+    private int _birdRegen = 10; //?
+    private int _birdHungerImpact = 20; //?
+    private int _birdScoreImpact = 10; //?
 
 
 
@@ -38,43 +45,29 @@ public class SkufHandler : MonoBehaviour
 
     private void InitializeManager()
     {
-        score = _minScore;
-        hunger = _maxHunger;
+        score = minScore;
+        hunger = maxHunger;
         scoreSlider.value = score;
         hungerSlider.value = hunger;
+        bearCount = 0;
+        foodCount = 0;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ChangeScore(40);
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            ChangeHunger(10);
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            ChangeScore(-40);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            ChangeHunger(-10);
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            ChangeMoney(13);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            ChangeMoney(-13);
-        }
+        if (Input.GetKeyDown(KeyCode.Q)) ChangeScore(40);
+        else if (Input.GetKeyDown(KeyCode.W)) ChangeHunger(10);
+        else if (Input.GetKeyDown(KeyCode.A)) ChangeScore(-40);
+        else if (Input.GetKeyDown(KeyCode.S)) ChangeHunger(-10);
+        else if (Input.GetKeyDown(KeyCode.E)) ChangeMoney(13);
+        else if (Input.GetKeyDown(KeyCode.D)) ChangeMoney(-13);
     }
 
     public void ChangeScore(int count)
-    {
-        if (score + count <= _maxScore && score + count >= _minHunger)
+    {  
+        if (score + count <= minScore) { score = minScore; }
+        else if (score + count >= maxScore) { score = maxScore; }
+        else
         {
             score += count;
             scoreSlider.value = score;
@@ -83,19 +76,37 @@ public class SkufHandler : MonoBehaviour
 
     public void ChangeHunger(int count)
     {
-        if (hunger + count <= _maxHunger && hunger + count >= _minHunger)
+        if (hunger + count <= minHunger) { hunger = minHunger; }
+        else if (hunger + count >= maxHunger) { hunger = maxHunger; }
+        else
         {
             hunger += count;
             hungerSlider.value = hunger;
         }
     }
 
+    public bool CanBuy(int count)
+    {
+        if (money - count < 0) { return false; }
+        else { return true; }
+    }
+
     public void ChangeMoney(int count)
     {
-        if (money + count >= 0)
-        {
-            money += count;
-            moneyText.text = money.ToString();
-        }
+
+        money += count;
+        moneyText.text = money.ToString();
+    }
+
+    public void EatBird() => StartCoroutine(EatBirdC());
+
+    private IEnumerator EatBirdC()
+    {
+        isBirdActive = false;
+        ChangeHunger(_birdHungerImpact);
+        ChangeScore(_birdScoreImpact);
+        yield return new WaitForSeconds(_birdRegen);
+
+        isBirdActive = true;
     }
 }
