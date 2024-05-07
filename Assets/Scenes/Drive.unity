@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 33078735}
   - component: {fileID: 33078737}
   - component: {fileID: 33078736}
+  - component: {fileID: 33078738}
   m_Layer: 5
   m_Name: Driver Img
   m_TagString: Untagged
@@ -234,6 +235,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33078734}
   m_CullTransparentMesh: 1
+--- !u!111 &33078738
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33078734}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 2c4a632f70900314eaa20fa38031dfe4, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 2c4a632f70900314eaa20fa38031dfe4, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &116807630
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +934,7 @@ GameObject:
   - component: {fileID: 1142107539}
   - component: {fileID: 1142107541}
   - component: {fileID: 1142107540}
+  - component: {fileID: 1142107542}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -940,8 +958,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32929.88, y: 0}
-  m_SizeDelta: {x: 67785.76, y: 1100}
+  m_AnchoredPosition: {x: 3130, y: 30}
+  m_SizeDelta: {x: 8192, y: 1156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1142107540
 MonoBehaviour:
@@ -981,6 +999,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142107538}
   m_CullTransparentMesh: 1
+--- !u!111 &1142107542
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142107538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9b0d3cb680d22c04594835bfbc442c0e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9b0d3cb680d22c04594835bfbc442c0e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1295856631
 GameObject:
   m_ObjectHideFlags: 0

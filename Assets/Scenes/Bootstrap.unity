@@ -752,7 +752,11 @@ MonoBehaviour:
   money: 0
   bearCount: 0
   foodCount: 0
-  _isBirdActive: 1
+  maxScore: 600
+  maxHunger: 150
+  minScore: 0
+  minHunger: 0
+  isBirdActive: 1
 --- !u!1 &1315253022
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,10 +11,10 @@ public class DriveHandler : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private float time = 10; //?
     [SerializeField] private int salary = 15; //?
-    [SerializeField] private int hungerImpact= 10; //?
+    [SerializeField] private int hungerImpact = 10; //?
 
     private bool _isDrive = false;
-    private const float _speed = 12;
+    private const float _speed = 12 * 10;
     private const float _amplitude = 0.05f;
     private const float _curDriverPos = -2.2f;
     private float _curBackPos;
@@ -29,30 +29,31 @@ public class DriveHandler : MonoBehaviour
         slider.maxValue = time;
     }
 
-    private void Update()
-    {
-        if (_isDrive)
+    /*
+        private void Update()
         {
-            _gameTime += Time.fixedDeltaTime / 25;
-            if (_gameTime >= 1)
+            if (_isDrive)
             {
-                _lifeTime += 1;
-                _gameTime = 0;
-            }
-            if (_lifeTime >= time)
-            {
-                DoneCanvas.SetActive(true);
-                _isDrive = false;
-                SkufHandler.instance.ChangeMoney(salary);
-                SkufHandler.instance.ChangeHunger(hungerImpact);
-            }
+                _gameTime += Time.fixedDeltaTime / 25;
+                if (_gameTime >= 1)
+                {
+                    _lifeTime += 1;
+                    _gameTime = 0;
+                }
+                if (_lifeTime >= time)
+                {
+                    DoneCanvas.SetActive(true);
+                    _isDrive = false;
+                    SkufHandler.instance.ChangeMoney(salary);
+                    SkufHandler.instance.ChangeHunger(hungerImpact);
+                }
 
-            driver.transform.position = new Vector3(driver.transform.position.x, _curDriverPos + Mathf.Sin(Time.fixedTime * _speed) * _amplitude, driver.transform.position.z);
-            backGround.transform.position = new Vector3(_curBackPos, backGround.transform.position.y, backGround.transform.position.z);
-            _curBackPos -= _speed / 1000;
-            slider.value = _lifeTime;
-        }
-    }
+                driver.transform.position = new Vector3(driver.transform.position.x, _curDriverPos + Mathf.Sin(Time.fixedTime * _speed) * _amplitude, driver.transform.position.z);
+                backGround.transform.position = new Vector3(_curBackPos, backGround.transform.position.y, backGround.transform.position.z);
+                _curBackPos -= _speed / 10000;
+                slider.value = _lifeTime;
+            }
+        }*/
 
     public void Drive()
     {
@@ -62,6 +63,10 @@ public class DriveHandler : MonoBehaviour
             backBtn.SetActive(false);
             _lifeTime = 0;
             _isDrive = true;
+
+            var animation = driver.gameObject.GetComponent<Animation>();
+            animation.Play();
+            backGround.GetComponent<Animation>().Play();
         }
     }
 }
