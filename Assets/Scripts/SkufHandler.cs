@@ -64,25 +64,21 @@ public class SkufHandler : MonoBehaviour
     }
 
     public void ChangeScore(int count)
-    {  
+    {
         if (score + count <= minScore) { score = minScore; }
         else if (score + count >= maxScore) { score = maxScore; }
-        else
-        {
-            score += count;
-            scoreSlider.value = score;
-        }
+        else { score += count; }
+
+        scoreSlider.value = score;
     }
 
     public void ChangeHunger(int count)
     {
         if (hunger + count <= minHunger) { hunger = minHunger; }
         else if (hunger + count >= maxHunger) { hunger = maxHunger; }
-        else
-        {
-            hunger += count;
-            hungerSlider.value = hunger;
-        }
+        else { hunger += count; }
+
+        hungerSlider.value = hunger;
     }
 
     public bool CanBuy(int count)
