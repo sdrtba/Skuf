@@ -9,51 +9,40 @@ public class DriveHandler : MonoBehaviour
     [SerializeField] private GameObject backBtn;
     [SerializeField] private GameObject driveBtn;
     [SerializeField] private Slider slider;
-    [SerializeField] private float time = 10; //?
     [SerializeField] private int salary = 15; //?
     [SerializeField] private int hungerImpact = 10; //?
 
     private bool _isDrive = false;
-    private const float _speed = 12 * 10;
-    private const float _amplitude = 0.05f;
-    private const float _curDriverPos = -2.2f;
-    private float _curBackPos;
-
-    private float _lifeTime;
-    private float _gameTime;
+    private Animator driveAnimator;
+    private Animation backgroundAnimation;
 
 
     private void Start()
     {
-        _curBackPos = backGround.transform.position.x;
-        slider.maxValue = time;
+        driveAnimator = driver.gameObject.GetComponent<Animator>();
+        backgroundAnimation = backGround.GetComponent<Animation>();
     }
 
-    /*
-        private void Update()
+    private void FixedUpdate()
+    {
+        if (_isDrive)
         {
-            if (_isDrive)
+            float state = driveAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            Debug.Log(state);
+            slider.value = state;
+            if (state >= 1)
             {
-                _gameTime += Time.fixedDeltaTime / 25;
-                if (_gameTime >= 1)
-                {
-                    _lifeTime += 1;
-                    _gameTime = 0;
-                }
-                if (_lifeTime >= time)
-                {
-                    DoneCanvas.SetActive(true);
-                    _isDrive = false;
-                    SkufHandler.instance.ChangeMoney(salary);
-                    SkufHandler.instance.ChangeHunger(hungerImpact);
-                }
+                _isDrive = false;
 
-                driver.transform.position = new Vector3(driver.transform.position.x, _curDriverPos + Mathf.Sin(Time.fixedTime * _speed) * _amplitude, driver.transform.position.z);
-                backGround.transform.position = new Vector3(_curBackPos, backGround.transform.position.y, backGround.transform.position.z);
-                _curBackPos -= _speed / 10000;
-                slider.value = _lifeTime;
+                driveAnimator.SetBool("isDrive", false);
+                backgroundAnimation.Stop();
+                DoneCanvas.SetActive(true);
+
+                SkufHandler.instance.ChangeMoney(salary);
+                SkufHandler.instance.ChangeHunger(hungerImpact);
             }
-        }*/
+        }
+    }
 
     public void Drive()
     {
@@ -61,12 +50,10 @@ public class DriveHandler : MonoBehaviour
         {
             driveBtn.SetActive(false);
             backBtn.SetActive(false);
-            _lifeTime = 0;
             _isDrive = true;
 
-            var animation = driver.gameObject.GetComponent<Animation>();
-            animation.Play();
-            backGround.GetComponent<Animation>().Play();
+            driveAnimator.SetBool("isDrive", true);
+            backgroundAnimation.Play();
         }
     }
 }
