@@ -14,7 +14,10 @@ public enum Arrow{
 
 public class SellerHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text indexText;
+    [SerializeField] private int hungerImpact = 20; //?
+    [SerializeField] private int moneyImpact = 25; //?
     private List<Arrow> _arrowList;
     private Arrow _curArrow;
     private float _index;
@@ -54,10 +57,15 @@ public class SellerHandler : MonoBehaviour
             _index += 1;
             indexText.text = $"{_index}/10";
 
-            if (_index >= 10)
+            if (_index >= 3)
             {
                 Debug.Log("Ok");
                 _curArrow = Arrow.None;
+
+                doneCanvas.SetActive(true);
+
+                SkufHandler.instance.ChangeHunger(-hungerImpact);
+                SkufHandler.instance.ChangeMoney(moneyImpact);
             }
             else
             {
