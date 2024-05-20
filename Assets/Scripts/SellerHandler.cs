@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum Arrow{
+public enum Arrow
+{
     Left,
     Right,
     Up,
@@ -14,18 +13,23 @@ public enum Arrow{
 
 public class SellerHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject itemsParent;
+    [SerializeField] private GameObject[] curItems;
+    [SerializeField] private Sprite[] itemSprites;
     [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text indexText;
     [SerializeField] private int hungerImpact = 20; //?
     [SerializeField] private int moneyImpact = 25; //?
+    private Transform _defItemsTransform;
     private List<Arrow> _arrowList;
     private Arrow _curArrow;
     private float _index;
+    private int _itemsCount = 5;
 
     private void CreateClient()
     {
         _arrowList = new List<Arrow>();
-        for (int i = 0; i < Random.Range(3, 10); i++)
+        for (int i = 0; i < _itemsCount; i++)
         {
             int r = Random.Range(0, 4);
             switch (r)
@@ -43,21 +47,26 @@ public class SellerHandler : MonoBehaviour
                     _arrowList.Add(Arrow.Down);
                     break;
             }
+
+            curItems[i].GetComponent<Image>().sprite = itemSprites[Random.Range(0, itemSprites.Length)];
         }
         _curArrow = _arrowList[0];
         Debug.Log(_curArrow);
-
     }
 
     private void ChangeItem()
     {
         _arrowList.RemoveAt(0);
+        itemsParent.transform.position -= new Vector3(0.5f, 0, 0);
 
-        if (_arrowList.Count == 0) {
+        if (_arrowList.Count == 0)
+        {
+            itemsParent.transform.position = _defItemsTransform.position;
+
             _index += 1;
             indexText.text = $"{_index}/10";
 
-            if (_index >= 3)
+            if (_index >= 10)
             {
                 Debug.Log("Ok");
                 _curArrow = Arrow.None;
@@ -81,26 +90,27 @@ public class SellerHandler : MonoBehaviour
 
     private void Start()
     {
+        _defItemsTransform = itemsParent.transform;
         CreateClient();
     }
 
     private void Update()
     {
-        if ( Input.GetKeyDown(KeyCode.LeftArrow) && _curArrow == Arrow.Left)
+        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && _curArrow == Arrow.Left)
         {
             ChangeItem();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && _curArrow == Arrow.Right)
+        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && _curArrow == Arrow.Right)
         {
             ChangeItem();
         }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && _curArrow == Arrow.Up)
+        else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _curArrow == Arrow.Up)
         {
             ChangeItem();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && _curArrow == Arrow.Down)
+        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _curArrow == Arrow.Down)
         {
             ChangeItem();
         }
     }
-} 
+}
