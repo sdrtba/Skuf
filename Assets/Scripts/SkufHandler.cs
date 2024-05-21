@@ -55,12 +55,12 @@ public class SkufHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) ChangeScore(40);
-        else if (Input.GetKeyDown(KeyCode.W)) ChangeHunger(10);
-        else if (Input.GetKeyDown(KeyCode.A)) ChangeScore(-40);
-        else if (Input.GetKeyDown(KeyCode.S)) ChangeHunger(-10);
-        else if (Input.GetKeyDown(KeyCode.E)) ChangeMoney(13);
-        else if (Input.GetKeyDown(KeyCode.D)) ChangeMoney(-13);
+        if (Input.GetKeyDown(KeyCode.I)) ChangeScore(40);
+        else if (Input.GetKeyDown(KeyCode.J)) ChangeScore(-40);
+        else if (Input.GetKeyDown(KeyCode.O)) ChangeHunger(10);
+        else if (Input.GetKeyDown(KeyCode.K)) ChangeHunger(-10);
+        else if (Input.GetKeyDown(KeyCode.P)) ChangeMoney(13);
+        else if (Input.GetKeyDown(KeyCode.L)) ChangeMoney(-13);
     }
 
     public void ChangeScore(int count)

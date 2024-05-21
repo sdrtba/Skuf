@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,62 +13,79 @@ public enum Arrow
 
 public class SellerHandler : MonoBehaviour
 {
+    [SerializeField] private RectTransform tape;
     [SerializeField] private GameObject itemsParent;
     [SerializeField] private GameObject[] curItems;
-    [SerializeField] private Sprite[] itemSprites;
+    [SerializeField] private GameObject[] itemObjects;
+    [SerializeField] private GameObject arrowObject;
+    [SerializeField] private Sprite[] arrowSprites;
     [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text indexText;
     [SerializeField] private int hungerImpact = 20; //?
     [SerializeField] private int moneyImpact = 25; //?
-    private Transform _defItemsTransform;
-    private List<Arrow> _arrowList;
+    private Vector3 _defParentPosition;
     private Arrow _curArrow;
     private float _index;
     private int _itemsCount = 5;
+    private bool _isDone = false;
+
+    private Arrow GetCurArrow()
+    {
+        int r = Random.Range(0, 4);
+        switch (r)
+        {
+            case 0:
+                arrowObject.GetComponent<Image>().sprite = arrowSprites[0];
+                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 90);
+                return Arrow.Left;
+            case 1:
+                arrowObject.GetComponent<Image>().sprite = arrowSprites[1];
+                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, -90);
+                return Arrow.Right;
+            case 2:
+                arrowObject.GetComponent<Image>().sprite = arrowSprites[2];
+                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 0);
+                return Arrow.Up;
+            case 3:
+                arrowObject.GetComponent<Image>().sprite = arrowSprites[3];
+                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 180);
+                return Arrow.Down;
+        }
+        return Arrow.None;
+    }
 
     private void CreateClient()
     {
-        _arrowList = new List<Arrow>();
+        _curArrow = GetCurArrow();
+        itemsParent.transform.position = _defParentPosition;
+        _isDone = false;
+
         for (int i = 0; i < _itemsCount; i++)
         {
-            int r = Random.Range(0, 4);
-            switch (r)
-            {
-                case 0:
-                    _arrowList.Add(Arrow.Left);
-                    break;
-                case 1:
-                    _arrowList.Add(Arrow.Right);
-                    break;
-                case 2:
-                    _arrowList.Add(Arrow.Up);
-                    break;
-                case 3:
-                    _arrowList.Add(Arrow.Down);
-                    break;
-            }
-
-            curItems[i].GetComponent<Image>().sprite = itemSprites[Random.Range(0, itemSprites.Length)];
+            int r = Random.Range(0, itemObjects.Length);
+            curItems[i].GetComponent<Image>().sprite = itemObjects[r].GetComponent<Image>().sprite;
+            curItems[i].GetComponent<RectTransform>().sizeDelta = itemObjects[r].GetComponent<RectTransform>().sizeDelta;
         }
-        _curArrow = _arrowList[0];
-        Debug.Log(_curArrow);
     }
 
-    private void ChangeItem()
+    private void ArrowClick()
     {
-        _arrowList.RemoveAt(0);
-        itemsParent.transform.position -= new Vector3(0.5f, 0, 0);
+        StartCoroutine(Move());
+        _curArrow = GetCurArrow();
 
-        if (_arrowList.Count == 0)
+        if (itemsParent.transform.position.x <= -15)
         {
-            itemsParent.transform.position = _defItemsTransform.position;
+            _isDone = true;
+            StopAllCoroutines();
+        }
 
+        if (_isDone)
+        {
             _index += 1;
             indexText.text = $"{_index}/10";
 
             if (_index >= 10)
             {
-                Debug.Log("Ok");
                 _curArrow = Arrow.None;
 
                 doneCanvas.SetActive(true);
@@ -81,16 +98,24 @@ public class SellerHandler : MonoBehaviour
                 CreateClient();
             }
         }
-        else
+    }
+
+    private IEnumerator Move()
+    {
+        float newPos = itemsParent.transform.position.x - 1f;
+        while (itemsParent.transform.position.x >= newPos)
         {
-            _curArrow = _arrowList[0];
-            Debug.Log(_curArrow);
+            itemsParent.transform.position -= new Vector3(0.1f, 0, 0);
+
+            tape.sizeDelta += new Vector2(10f, 0);
+
+            yield return new WaitForSeconds(0.02f);
         }
     }
 
     private void Start()
     {
-        _defItemsTransform = itemsParent.transform;
+        _defParentPosition = itemsParent.transform.position;
         CreateClient();
     }
 
@@ -98,19 +123,19 @@ public class SellerHandler : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && _curArrow == Arrow.Left)
         {
-            ChangeItem();
+            ArrowClick();
         }
         else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && _curArrow == Arrow.Right)
         {
-            ChangeItem();
+            ArrowClick();
         }
         else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _curArrow == Arrow.Up)
         {
-            ChangeItem();
+            ArrowClick();
         }
         else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _curArrow == Arrow.Down)
         {
-            ChangeItem();
+            ArrowClick();
         }
     }
 }
