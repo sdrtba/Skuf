@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fracture.unity
     guid: c0d9ae53b535d71488452f92c04af1d4
+  - enabled: 1
+    path: Assets/Scenes/Tanks.unity
+    guid: e2a4bfd5c9b57af4f8892ab61841e65e
   m_configObjects: {}
