@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 189593674}
   - component: {fileID: 189593676}
   - component: {fileID: 189593675}
+  - component: {fileID: 189593677}
   m_Layer: 5
   m_Name: Tank Img (2)
   m_TagString: Untagged
@@ -273,6 +274,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189593673}
   m_CullTransparentMesh: 1
+--- !u!114 &189593677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189593673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c35d2fdff04794cac36621afc7e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
 --- !u!1 &260631889
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +298,7 @@ GameObject:
   - component: {fileID: 260631890}
   - component: {fileID: 260631892}
   - component: {fileID: 260631891}
+  - component: {fileID: 260631893}
   m_Layer: 5
   m_Name: Tank Img
   m_TagString: Untagged
@@ -348,6 +363,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260631889}
   m_CullTransparentMesh: 1
+--- !u!114 &260631893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260631889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c35d2fdff04794cac36621afc7e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
 --- !u!1 &307838875
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +387,7 @@ GameObject:
   - component: {fileID: 307838876}
   - component: {fileID: 307838878}
   - component: {fileID: 307838877}
+  - component: {fileID: 307838879}
   m_Layer: 5
   m_Name: Tank Img (4)
   m_TagString: Untagged
@@ -423,6 +452,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307838875}
   m_CullTransparentMesh: 1
+--- !u!114 &307838879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307838875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c35d2fdff04794cac36621afc7e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
 --- !u!1 &391114107
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +537,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1439270170}
+  m_Father: {fileID: 1426792629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -598,7 +640,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -900,6 +942,7 @@ GameObject:
   - component: {fileID: 1085545116}
   - component: {fileID: 1085545118}
   - component: {fileID: 1085545117}
+  - component: {fileID: 1085545119}
   m_Layer: 5
   m_Name: Tank Img (3)
   m_TagString: Untagged
@@ -964,6 +1007,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085545115}
   m_CullTransparentMesh: 1
+--- !u!114 &1085545119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085545115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c35d2fdff04794cac36621afc7e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
 --- !u!1 &1142776263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1140,7 @@ GameObject:
   - component: {fileID: 1425454516}
   - component: {fileID: 1425454518}
   - component: {fileID: 1425454517}
+  - component: {fileID: 1425454519}
   m_Layer: 5
   m_Name: Tank Img (1)
   m_TagString: Untagged
@@ -1148,6 +1205,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425454515}
   m_CullTransparentMesh: 1
+--- !u!114 &1425454519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425454515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c35d2fdff04794cac36621afc7e198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
 --- !u!1 &1426792625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,6 +1315,7 @@ RectTransform:
   - {fileID: 65699314}
   - {fileID: 391114108}
   - {fileID: 1871204090}
+  - {fileID: 632255706}
   - {fileID: 950855979}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1347,12 +1418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84d18ce4a38dc47a07452a394acc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tanks:
-  - {fileID: 260631889}
-  - {fileID: 1425454515}
-  - {fileID: 189593673}
-  - {fileID: 1085545115}
-  - {fileID: 307838875}
   cursor: {fileID: 632255705}
   hpSlider: {fileID: 851386767}
 --- !u!1 &1439270169
@@ -1383,7 +1448,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 632255706}
   - {fileID: 2054537418}
   - {fileID: 1585565333}
   - {fileID: 1831601141}
