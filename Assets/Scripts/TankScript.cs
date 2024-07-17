@@ -4,60 +4,121 @@ using UnityEngine.UI;
 
 public class TankScript : MonoBehaviour
 {
+    [SerializeField] private TanksHandler tanksHandler;
+
+    [SerializeField] private GameObject aim;
+
+    [SerializeField] private Transform newPos;
+    private Vector3 defaultPos;
     [SerializeField] private Sprite deadSprite;
-    private bool _isMoving = false;
-    private bool _isShooting = true;
-    private bool _isDead = false;
-    private float offset = 1.5f;
-    private float _speed = 0.0007f;
-    private float _baseY;
-    private float _downY;
-    private int _cooldown;
+    private Sprite defaultSprite;
+    [SerializeField] private GameObject shot;
+    [SerializeField] private float speed;
+    [SerializeField] private float cooldown;
+    [SerializeField] private int maxDelay;
+    private float offset = 0.4f;
+    private float _timer;
+    private bool _isUping = true;
+    private bool _isShooting = false;
+    private bool _isDowing = false;
+    private float _time = 0;
+    private bool _canShoot = false;
+    private bool _active = true;
 
     private void Start()
     {
-        _baseY = transform.position.y;
-        transform.position -= new Vector3(0, offset, 0);
-        _downY = transform.position.y;
-
-        int r = Random.Range(0, 5);
-        if (r == 1 || r == 2) _isMoving = true;
+        defaultPos = GetComponent<Transform>().position;
+        defaultSprite = GetComponent<Image>().sprite;
+        _timer = Random.Range(0, maxDelay);
     }
 
     private void Update()
     {
-        if (_isMoving)
+        if (_active) _timer -= Time.deltaTime;
+        if (_timer <= 0)
         {
-            transform.position += new Vector3(0, _speed, 0);
+            if (_isUping)
+            {
+                transform.position = Vector3.Lerp(transform.position, newPos.position, speed * Time.deltaTime);
+                if (transform.position.y >= newPos.position.y - offset/5)
+                {
+                    _isUping = false;
+                    _isDowing = false;
+                    _isShooting = true;
+                }
+            }
+            else if (_isShooting)
+            {
+                _time += Time.deltaTime;
+                if (_time > cooldown)
+                {
+                    Instantiate(shot, transform.position + new Vector3(0, offset, 0), Quaternion.identity);
+                    _time = 0;
+
+                    if (tanksHandler.GetDamage()) Stop();
+                }
+            }
+            else if (_isDowing)
+            {
+                transform.position = Vector3.Lerp(transform.position, defaultPos, speed * Time.deltaTime);
+                if (transform.position.y <= defaultPos.y + offset/5)
+                {
+                    _isDowing = false;
+                    _isShooting = false;
+                    _isUping = true;
+                    _timer = Random.Range(0, maxDelay);
+                    ChangeSprite();
+                }
+            }
         }
-        else if (_isShooting)
+
+        if (Input.GetKeyDown(KeyCode.Space) && _canShoot)
         {
-            StartCoroutine(Shoot());
-        }
-        if (_isDead)
-        {
-            transform.position = new Vector3(0, _speed, 0);
-        }
-        if (transform.position.y > _baseY)
-        {
-            _isMoving = false;
-        }
-        if (transform.position.y < _downY)
-        {
-            _isDead = false;
+            Die();
+            if (tanksHandler.IncreaseScore()) Stop();
         }
     }
 
-    private IEnumerator Shoot()
+    private void Stop()
     {
-        _isShooting = false;
-        yield return new WaitForSeconds(_cooldown);
-        Debug.Log("Shoot");
-        _isShooting = true;
+        _timer = 1;
+        _active = false;
     }
 
     private void Die()
     {
-        gameObject.GetComponent<Image>().sprite = deadSprite;
+        _isUping = false;
+        _isShooting = false;
+        _isDowing = true;
+        ChangeSprite();
+    }
+
+    private void ChangeSprite()
+    {
+        Image Image = GetComponent<Image>();
+        if (Image.sprite == defaultSprite)
+        {
+            Image.sprite = deadSprite;
+        }
+        else
+        {
+            Image.sprite = defaultSprite;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("aim"))
+        {
+            _canShoot = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("aim"))
+        {
+            _canShoot = false;
+        }
     }
 }
