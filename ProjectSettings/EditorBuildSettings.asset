@@ -27,8 +27,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Seller.unity
     guid: 0889b3d98fb9ca54b9638be17e8f79b2
   - enabled: 1
-    path: Assets/Scenes/Fracture.unity
-    guid: c0d9ae53b535d71488452f92c04af1d4
+    path: Assets/Scenes/Zavod.unity
+    guid: a3f35ab8d1aa60748abc20f25bac0ea5
   - enabled: 1
     path: Assets/Scenes/Tanks.unity
     guid: e2a4bfd5c9b57af4f8892ab61841e65e

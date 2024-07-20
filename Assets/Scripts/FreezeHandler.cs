@@ -9,7 +9,7 @@ public class FreezeHandler : MonoBehaviour
     [SerializeField] private Text foodText;
     [SerializeField] private int bearImpact = 10; //?
     [SerializeField] private int foodImpact = 10; //?
-    [SerializeField] private int foodExtraImpact = 10; //?
+    [SerializeField] private int foodExtraImpact = 15; //?
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class FreezeHandler : MonoBehaviour
     {
         if (SkufHandler.instance.hunger != SkufHandler.instance.maxHunger)
         {
-            if (SkufHandler.instance.hunger > SkufHandler.instance.maxHunger * 0.33) SkufHandler.instance.ChangeScore(foodExtraImpact);
+            if (SkufHandler.instance.hunger > SkufHandler.instance.maxHunger * 0.66) SkufHandler.instance.ChangeScore(foodExtraImpact);
 
             SkufHandler.instance.foodCount--;
             SkufHandler.instance.ChangeHunger(foodImpact);
