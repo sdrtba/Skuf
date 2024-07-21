@@ -3,16 +3,18 @@ using UnityEngine.UI;
 
 public class BirdHandler : MonoBehaviour
 {
+    [SerializeField] GameObject bird;
+
     private void Start()
     {
-        if (!SkufHandler.instance.isBirdActive) gameObject.SetActive(false);
-        if (SkufHandler.instance.hunger > 0) gameObject.GetComponent<Button>().interactable = false;
+        if (!SkufHandler.instance.isBirdActive) bird.SetActive(false);
+        if (SkufHandler.instance.hunger > 0) bird.GetComponent<Button>().interactable = false;
     }
 
 
     public void Eat()
     {
-        Destroy(gameObject);
+        Destroy(bird);
         SkufHandler.instance.EatBird();
     }
 }

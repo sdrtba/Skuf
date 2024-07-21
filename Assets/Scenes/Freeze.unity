@@ -580,7 +580,7 @@ MonoBehaviour:
   foodText: {fileID: 649461842}
   bearImpact: 10
   foodImpact: 15
-  foodExtraImpact: 10
+  foodExtraImpact: 5
 --- !u!1 &649461840
 GameObject:
   m_ObjectHideFlags: 0

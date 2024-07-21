@@ -109,7 +109,7 @@ public class ZavodHandler : MonoBehaviour
             if (_score >= winScore)
             {
                 doneCanvas.SetActive(true);
-                SkufHandler.instance.ChangeHunger(hungerImpact);
+                SkufHandler.instance.ChangeHunger(-hungerImpact);
                 SkufHandler.instance.ChangeMoney(moneyImpact);
             }
         }

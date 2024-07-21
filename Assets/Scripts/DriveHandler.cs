@@ -1,16 +1,18 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DriveHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject DoneCanvas;
+    [SerializeField] private GameObject hungerCanvas;
+    [SerializeField] private GameObject doneCanvas;
+    [SerializeField] private TextMeshProUGUI doneText;
     [SerializeField] private GameObject backGround;
     [SerializeField] private GameObject driver;
-    [SerializeField] private GameObject backBtn;
-    [SerializeField] private GameObject driveBtn;
+    [SerializeField] private GameObject[] unactiveObjects;
     [SerializeField] private Slider slider;
-    [SerializeField] private int salary = 15; //?
-    [SerializeField] private int hungerImpact = 10; //?
+    [SerializeField] private int moneyImpact;
+    [SerializeField] private int hungerImpact;
 
     private bool _isDrive = false;
     private Animator driveAnimator;
@@ -19,6 +21,9 @@ public class DriveHandler : MonoBehaviour
 
     private void Start()
     {
+        if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+
+        doneText.SetText(doneText.text, hungerImpact, moneyImpact);
         driveAnimator = driver.gameObject.GetComponent<Animator>();
         backgroundAnimation = backGround.GetComponent<Animation>();
     }
@@ -28,7 +33,6 @@ public class DriveHandler : MonoBehaviour
         if (_isDrive)
         {
             float state = driveAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            Debug.Log(state);
             slider.value = state;
             if (state >= 1)
             {
@@ -36,24 +40,23 @@ public class DriveHandler : MonoBehaviour
 
                 driveAnimator.SetBool("isDrive", false);
                 backgroundAnimation.Stop();
-                DoneCanvas.SetActive(true);
+                doneCanvas.SetActive(true);
 
-                SkufHandler.instance.ChangeMoney(salary);
-                SkufHandler.instance.ChangeHunger(hungerImpact);
+                SkufHandler.instance.ChangeMoney(moneyImpact);
+                SkufHandler.instance.ChangeHunger(-hungerImpact);
             }
         }
     }
 
     public void Drive()
     {
-        if (SkufHandler.instance.hunger > 0)
+        foreach (GameObject go in unactiveObjects)
         {
-            driveBtn.SetActive(false);
-            backBtn.SetActive(false);
-            _isDrive = true;
-
-            driveAnimator.SetBool("isDrive", true);
-            backgroundAnimation.Play();
+            go.SetActive(false);
         }
+        _isDrive = true;
+
+        driveAnimator.SetBool("isDrive", true);
+        backgroundAnimation.Play();
     }
 }

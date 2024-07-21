@@ -3,29 +3,25 @@ using UnityEngine;
 public class TVHandler : MonoBehaviour
 {
     [SerializeField] private GameObject skuf;
-    [SerializeField] private float scoreImpact = 0.5f; //?
-    [SerializeField] private float hungerImpact = 1f; //?
-    private float _localHunger = 0;
-    private float _localScore = 0;
+    [SerializeField] private int hungerByScoreImpact;
+    [SerializeField] private float speed;
     private bool _isActive = false;
+    private float _defSpeed;
 
     public void ToggleActive() => _isActive = !_isActive;
 
+    private void Start() => _defSpeed = speed;
+
     private void FixedUpdate()
     {
-        if (_isActive && SkufHandler.instance.hunger >= 100)
+        if (_isActive && SkufHandler.instance.hunger >= SkufHandler.instance.maxHunger*0.66)
         {
-            _localHunger += hungerImpact;
-            _localScore += scoreImpact;
-            if (_localHunger > 1.5)
+            speed -= Time.deltaTime;
+            if (speed < 0)
             {
-                SkufHandler.instance.ChangeHunger(-(int)_localHunger);
-                _localHunger = 0;
-            }
-            if (_localScore > 1.5)
-            {
-                SkufHandler.instance.ChangeScore((int)_localScore);
-                _localScore = 0;
+                SkufHandler.instance.ChangeHunger(-hungerByScoreImpact);
+                SkufHandler.instance.ChangeScore(1);
+                speed = _defSpeed;
             }
         }
     }

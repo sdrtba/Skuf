@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,10 +20,12 @@ public class SellerHandler : MonoBehaviour
     [SerializeField] private GameObject[] itemObjects;
     [SerializeField] private GameObject arrowObject;
     [SerializeField] private Sprite[] arrowSprites;
+    [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
+    [SerializeField] private TextMeshProUGUI doneText;
     [SerializeField] private Text indexText;
-    [SerializeField] private int hungerImpact = 20; //?
-    [SerializeField] private int moneyImpact = 25; //?
+    [SerializeField] private int hungerImpact;
+    [SerializeField] private int moneyImpact;
     private Vector3 _defParentPosition;
     private Arrow _curArrow;
     private float _index;
@@ -115,6 +118,9 @@ public class SellerHandler : MonoBehaviour
 
     private void Start()
     {
+        if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+
+        doneText.SetText(doneText.text, hungerImpact, moneyImpact);
         _defParentPosition = itemsParent.transform.position;
         CreateClient();
     }

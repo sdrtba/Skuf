@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 637876696}
   - component: {fileID: 637876695}
   - component: {fileID: 637876698}
+  - component: {fileID: 637876699}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -767,6 +768,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8620f4add979ff94e8561521764dc4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &637876699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637876694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75228bc436a60714c80279421b8a90f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skuf: {fileID: 611966836}
+  hungerByScoreImpact: 2
+  speed: 1
 --- !u!1 &705489900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,7 +2112,6 @@ GameObject:
   - component: {fileID: 1803881020}
   - component: {fileID: 1803881019}
   - component: {fileID: 1803881022}
-  - component: {fileID: 1803881023}
   m_Layer: 5
   m_Name: TV Btn
   m_TagString: Untagged
@@ -2179,7 +2194,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1803881023}
+      - m_Target: {fileID: 637876699}
         m_TargetAssemblyTypeName: TVHandler, Assembly-CSharp
         m_MethodName: ToggleActive
         m_Mode: 1
@@ -2256,21 +2271,6 @@ MonoBehaviour:
   - {fileID: 329452572, guid: a53a7553d0938204a8a2e5c1751a6957, type: 3}
   - {fileID: -644088339, guid: a53a7553d0938204a8a2e5c1751a6957, type: 3}
   skuf: {fileID: 611966836}
---- !u!114 &1803881023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803881017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75228bc436a60714c80279421b8a90f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skuf: {fileID: 611966836}
-  scoreImpact: 0.005
-  hungerImpact: 0.01
 --- !u!1 &1881634036
 GameObject:
   m_ObjectHideFlags: 0
