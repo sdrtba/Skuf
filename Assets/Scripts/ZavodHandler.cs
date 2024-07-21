@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class ZavodHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
+    [SerializeField] private Text doneText;
     [SerializeField] private int moneyImpact = 30;
     [SerializeField] private int hungerImpact = 25;
 
@@ -41,6 +44,10 @@ public class ZavodHandler : MonoBehaviour
 
     private void Start()
     {
+        if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+        doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
+
+
         prevBtn.enabled = false;
         sliderRectTransform = slider.GetComponent<RectTransform>();
 

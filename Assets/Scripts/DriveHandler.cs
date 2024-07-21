@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +5,7 @@ public class DriveHandler : MonoBehaviour
 {
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
-    [SerializeField] private TextMeshProUGUI doneText;
+    [SerializeField] private Text doneText;
     [SerializeField] private GameObject backGround;
     [SerializeField] private GameObject driver;
     [SerializeField] private GameObject[] unactiveObjects;
@@ -23,7 +22,7 @@ public class DriveHandler : MonoBehaviour
     {
         if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
 
-        doneText.SetText(doneText.text, hungerImpact, moneyImpact);
+        doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
         driveAnimator = driver.gameObject.GetComponent<Animator>();
         backgroundAnimation = backGround.GetComponent<Animation>();
     }

@@ -1,5 +1,4 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +13,7 @@ public enum Arrow
 
 public class SellerHandler : MonoBehaviour
 {
-    [SerializeField] private RectTransform tape;
+    [SerializeField] private RectTransform line;
     [SerializeField] private GameObject itemsParent;
     [SerializeField] private GameObject[] curItems;
     [SerializeField] private GameObject[] itemObjects;
@@ -22,15 +21,45 @@ public class SellerHandler : MonoBehaviour
     [SerializeField] private Sprite[] arrowSprites;
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
-    [SerializeField] private TextMeshProUGUI doneText;
-    [SerializeField] private Text indexText;
+    [SerializeField] private Text doneText;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private int winScore;
     [SerializeField] private int hungerImpact;
     [SerializeField] private int moneyImpact;
     private Vector3 _defParentPosition;
     private Arrow _curArrow;
-    private float _index;
+    private float _score;
     private int _itemsCount = 5;
     private bool _isDone = false;
+
+    private void Start()
+    {
+        if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+
+        doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
+        _defParentPosition = itemsParent.transform.position;
+        CreateClient();
+    }
+
+    private void Update()
+    {
+        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && _curArrow == Arrow.Left)
+        {
+            ArrowClick();
+        }
+        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && _curArrow == Arrow.Right)
+        {
+            ArrowClick();
+        }
+        else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _curArrow == Arrow.Up)
+        {
+            ArrowClick();
+        }
+        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _curArrow == Arrow.Down)
+        {
+            ArrowClick();
+        }
+    }
 
     private Arrow GetCurArrow()
     {
@@ -84,10 +113,10 @@ public class SellerHandler : MonoBehaviour
 
         if (_isDone)
         {
-            _index += 1;
-            indexText.text = $"{_index}/5";
+            _score += 1;
+            scoreText.text = $"{_score}/{winScore}";
 
-            if (_index >= 5)
+            if (_score >= winScore)
             {
                 _curArrow = Arrow.None;
 
@@ -110,38 +139,9 @@ public class SellerHandler : MonoBehaviour
         {
             itemsParent.transform.position -= new Vector3(0.1f, 0, 0);
 
-            tape.sizeDelta += new Vector2(10f, 0);
+            line.sizeDelta += new Vector2(10f, 0);
 
             yield return new WaitForSeconds(0.02f);
-        }
-    }
-
-    private void Start()
-    {
-        if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
-
-        doneText.SetText(doneText.text, hungerImpact, moneyImpact);
-        _defParentPosition = itemsParent.transform.position;
-        CreateClient();
-    }
-
-    private void Update()
-    {
-        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && _curArrow == Arrow.Left)
-        {
-            ArrowClick();
-        }
-        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && _curArrow == Arrow.Right)
-        {
-            ArrowClick();
-        }
-        else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _curArrow == Arrow.Up)
-        {
-            ArrowClick();
-        }
-        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _curArrow == Arrow.Down)
-        {
-            ArrowClick();
         }
     }
 }
