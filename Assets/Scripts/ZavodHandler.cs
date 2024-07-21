@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,14 +20,27 @@ public class ZavodHandler : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private float sliderSpeed;
     [SerializeField] private float successRangeValue;
+    private RectTransform sliderRectTransform;
     private bool _sliderMoveRight = true;
     private float _random;
+
+    [SerializeField] private GameObject[] itemSprites;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Text neededIdText;
+    [SerializeField] private RectTransform spawnPoint;
+    [SerializeField] private GameObject line;
+    [SerializeField] private float lineSpeed;
+    private int _score = 0;
+    private bool _canMoveLine = false;
+    private int _neededId;
 
     private void Start()
     {
         prevBtn.enabled = false;
-        _random = Random.Range(0, 1 - successRangeValue);
-        successRange.transform.localPosition = new Vector3(_random*345, 0, 0);
+        sliderRectTransform = slider.GetComponent<RectTransform>();
+
+        SetNeededId();
+        ChangeRange();
     }
 
     private void Update()
@@ -59,41 +73,63 @@ public class ZavodHandler : MonoBehaviour
         {
             _sliderMoveRight = true;
         }
+
+        if (_canMoveLine)
+        {
+            line.transform.position -= new Vector3(Time.deltaTime * lineSpeed, 0, 0);
+        }
+    }
+
+    private IEnumerator MoveLine()
+    {
+        _canMoveLine = true;
+        yield return new WaitForSeconds(1);
+        _canMoveLine = false;
+    }
+
+    private void SetNeededId()
+    {
+        _neededId = Random.Range(0, maxSize + 1);
+        neededIdText.text = "Need: " + _neededId;
+    }
+
+    public void BtnPressed()
+    {
+        if (slider.value >= _random && slider.value <= _random + successRangeValue && _id == _neededId)
+        {
+            _score += 1;
+            scoreText.text = "Score: " + _score;
+            Instantiate(itemSprites[_id], spawnPoint.position, Quaternion.identity, line.transform);
+        }
+        else Instantiate(itemSprites[itemSprites.Length - 1], spawnPoint.position, Quaternion.identity, line.transform);
+        SetNeededId();
+        ChangeRange();
+        StartCoroutine(MoveLine());
+    }
+
+    private void ChangeRange()
+    {
+        _random = Random.Range(0, 1 - successRangeValue);
+        RectTransform successRangeRectTransform = successRange.GetComponent<RectTransform>();
+
+        successRangeRectTransform.sizeDelta = new Vector2(sliderRectTransform.sizeDelta.x * successRangeValue, successRangeRectTransform.sizeDelta.y);
+        successRangeRectTransform.anchoredPosition = new Vector3(_random * sliderRectTransform.sizeDelta.x, 0, 0);
     }
 
     public void Next()
     {
         _moveLeft = true;
 
-
         _id += 1;
         CheckButton();
-
     }
 
     public void Prev()
     {
         _moveRight = true;
 
-
         _id -= 1;
         CheckButton();
-    }
-    public void BtnPressed()
-    {
-        if (slider.value >= _random && slider.value <= _random + successRangeValue)
-        {
-            Debug.Log("Ok");
-            _random = Random.Range(0, 1 - successRangeValue);
-            successRange.transform.localPosition = new Vector3(_random * 345, 0, 0);
-        }
-        else
-        {
-            Debug.Log("False");
-        }
-
-        
-
     }
 
     private void CheckButton()
