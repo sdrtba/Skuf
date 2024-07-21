@@ -82,9 +82,9 @@ public class SellerHandler : MonoBehaviour
         if (_isDone)
         {
             _index += 1;
-            indexText.text = $"{_index}/10";
+            indexText.text = $"{_index}/5";
 
-            if (_index >= 10)
+            if (_index >= 5)
             {
                 _curArrow = Arrow.None;
 

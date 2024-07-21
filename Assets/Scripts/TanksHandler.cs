@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TanksHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject loseCanvas;
+    [SerializeField] private GameObject winCanvas;
     [SerializeField] private Slider hpSlider;
     [SerializeField] private GameObject aim;
     [SerializeField] private float damage;
     [SerializeField] private int winScore;
+    [SerializeField] private float aimSpeed;
     private int score = 0;
     private Rigidbody2D _aimRb;
     private float _horizontal;
     private float _vertical;
-    private float _aimSpeed = 200;
+    private bool _active = true;
 
     private void Start()
     {
@@ -25,7 +26,8 @@ public class TanksHandler : MonoBehaviour
         _horizontal = Input.GetAxisRaw("Horizontal");
         _vertical = Input.GetAxisRaw("Vertical");
 
-        _aimRb.AddForce(new Vector3(_horizontal * _aimSpeed * Time.deltaTime, _vertical * _aimSpeed * Time.deltaTime, 0));
+        if (_active)
+            _aimRb.AddForce(new Vector3(_horizontal * aimSpeed * Time.deltaTime, _vertical * aimSpeed * Time.deltaTime, 0));
     }
 
     public bool GetDamage()
@@ -33,7 +35,8 @@ public class TanksHandler : MonoBehaviour
         hpSlider.value -= damage;
         if (hpSlider.value <= 0)
         {
-            Debug.Log("lose");
+            _active = false;
+            loseCanvas.SetActive(true);
             return true;
         }
         return false;
@@ -43,7 +46,8 @@ public class TanksHandler : MonoBehaviour
     {
         score += 1;
         if (score >= winScore) {
-            Debug.Log("win");
+            _active = false;
+            winCanvas.SetActive(true);
             return true;
         }
         return false;

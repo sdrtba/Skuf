@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class ZavodHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject doneCanvas;
+    [SerializeField] private int moneyImpact = 30;
+    [SerializeField] private int hungerImpact = 25;
+
     [SerializeField] private GameObject imageItems;
     [SerializeField] private Transform[] imageItemsPoints;
     [SerializeField] private Button nextBtn;
@@ -30,6 +34,7 @@ public class ZavodHandler : MonoBehaviour
     [SerializeField] private RectTransform spawnPoint;
     [SerializeField] private GameObject line;
     [SerializeField] private float lineSpeed;
+    [SerializeField] private int winScore;
     private int _score = 0;
     private bool _canMoveLine = false;
     private int _neededId;
@@ -98,8 +103,15 @@ public class ZavodHandler : MonoBehaviour
         if (slider.value >= _random && slider.value <= _random + successRangeValue && _id == _neededId)
         {
             _score += 1;
-            scoreText.text = "Score: " + _score;
+            scoreText.text = "Score: " + _score + "/" + winScore;
             Instantiate(itemSprites[_id], spawnPoint.position, Quaternion.identity, line.transform);
+
+            if (_score >= winScore)
+            {
+                doneCanvas.SetActive(true);
+                SkufHandler.instance.ChangeHunger(hungerImpact);
+                SkufHandler.instance.ChangeMoney(moneyImpact);
+            }
         }
         else Instantiate(itemSprites[itemSprites.Length - 1], spawnPoint.position, Quaternion.identity, line.transform);
         SetNeededId();

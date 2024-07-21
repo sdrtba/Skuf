@@ -22,10 +22,11 @@ public class TankScript : MonoBehaviour
     private bool _isDowing = false;
     private float _time = 0;
     private bool _canShoot = false;
-    private bool _active = true;
+    public static bool _tankActive = true;
 
     private void Start()
     {
+        _tankActive = true;
         defaultPos = GetComponent<Transform>().position;
         defaultSprite = GetComponent<Image>().sprite;
         _timer = Random.Range(0, maxDelay);
@@ -33,55 +34,57 @@ public class TankScript : MonoBehaviour
 
     private void Update()
     {
-        if (_active) _timer -= Time.deltaTime;
-        if (_timer <= 0)
+        if (_tankActive)
         {
-            if (_isUping)
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
             {
-                transform.position = Vector3.Lerp(transform.position, newPos.position, speed * Time.deltaTime);
-                if (transform.position.y >= newPos.position.y - offset/5)
+                if (_isUping)
                 {
-                    _isUping = false;
-                    _isDowing = false;
-                    _isShooting = true;
+                    transform.position = Vector3.Lerp(transform.position, newPos.position, speed * Time.deltaTime);
+                    if (transform.position.y >= newPos.position.y - offset / 5)
+                    {
+                        _isUping = false;
+                        _isDowing = false;
+                        _isShooting = true;
+                    }
                 }
-            }
-            else if (_isShooting)
-            {
-                _time += Time.deltaTime;
-                if (_time > cooldown)
+                else if (_isShooting)
                 {
-                    Instantiate(shot, transform.position + new Vector3(0, offset, 0), Quaternion.identity);
-                    _time = 0;
+                    _time += Time.deltaTime;
+                    if (_time > cooldown)
+                    {
+                        Instantiate(shot, transform.position + new Vector3(0, offset, 0), Quaternion.identity);
+                        _time = 0;
 
-                    if (tanksHandler.GetDamage()) Stop();
+                        if (tanksHandler.GetDamage()) Stop();
+                    }
                 }
-            }
-            else if (_isDowing)
-            {
-                transform.position = Vector3.Lerp(transform.position, defaultPos, speed * Time.deltaTime);
-                if (transform.position.y <= defaultPos.y + offset/5)
+                else if (_isDowing)
                 {
-                    _isDowing = false;
-                    _isShooting = false;
-                    _isUping = true;
-                    _timer = Random.Range(0, maxDelay);
-                    ChangeSprite();
+                    transform.position = Vector3.Lerp(transform.position, defaultPos, speed * Time.deltaTime);
+                    if (transform.position.y <= defaultPos.y + offset / 5)
+                    {
+                        _isDowing = false;
+                        _isShooting = false;
+                        _isUping = true;
+                        _timer = Random.Range(0, maxDelay);
+                        ChangeSprite();
+                    }
                 }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _canShoot)
-        {
-            Die();
-            if (tanksHandler.IncreaseScore()) Stop();
+            if (Input.GetKeyDown(KeyCode.Space) && _canShoot)
+            {
+                Die();
+                if (tanksHandler.IncreaseScore()) Stop();
+            }
         }
     }
 
     private void Stop()
     {
-        _timer = 1;
-        _active = false;
+        _tankActive = false;
     }
 
     private void Die()
