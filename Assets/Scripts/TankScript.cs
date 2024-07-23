@@ -4,17 +4,15 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField] private TanksHandler tanksHandler;
-
     [SerializeField] private GameObject aim;
-
-    [SerializeField] private Transform newPos;
-    private Vector3 defaultPos;
-    [SerializeField] private Sprite deadSprite;
-    private Sprite defaultSprite;
     [SerializeField] private GameObject shot;
-    [SerializeField] private float speed;
-    [SerializeField] private float cooldown;
-    [SerializeField] private int maxDelay;
+    [SerializeField] private Transform newPos;
+    [SerializeField] private Sprite deadSprite;
+    [Range(0f, 100f)][SerializeField] private float speed;
+    [Range(0f, 100f)][SerializeField] private float cooldown;
+    [Range(0, 100)][SerializeField] private int maxDelay;
+    private Sprite defaultSprite;
+    private Vector3 defaultPos;
     private float offset = 0.4f;
     private float _timer;
     private bool _isUping = true;

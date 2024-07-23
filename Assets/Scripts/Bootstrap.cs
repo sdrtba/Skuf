@@ -5,14 +5,14 @@ public class Bootstrap : MonoBehaviour
 {
     [SerializeField] private Canvas HUD;
     private bool _isActive;
-    private int id;
+    private int _sceneId;
 
     private void Start() => SceneManager.LoadScene(1);
 
     private void FixedUpdate()
     {
-        id = SceneManager.GetActiveScene().buildIndex;
-        if (id == 5 || id == 6 || id == 7 || id == 8)
+        _sceneId = SceneManager.GetActiveScene().buildIndex;
+        if (_sceneId == 5 || _sceneId == 6 || _sceneId == 7 || _sceneId == 8)
         {
             _isActive = false;
         }

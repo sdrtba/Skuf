@@ -1,22 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class ZavodHandler : MonoBehaviour
 {
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text doneText;
-    [SerializeField] private int moneyImpact = 30;
-    [SerializeField] private int hungerImpact = 25;
+    [Range(0, 100)][SerializeField] private int moneyImpact;
+    [Range(0, 100)][SerializeField] private int hungerImpact;
 
     [SerializeField] private GameObject imageItems;
     [SerializeField] private Transform[] imageItemsPoints;
     [SerializeField] private Button nextBtn;
     [SerializeField] private Button prevBtn;
-    [SerializeField] private float offset;
-    [SerializeField] private float speed;
+    [Range(0f, 100f)][SerializeField] private float offset;
+    [Range(0f, 100f)][SerializeField] private float speed;
     private bool _moveLeft = false;
     private bool _moveRight = false;
     private int maxSize = 3;
@@ -25,8 +24,8 @@ public class ZavodHandler : MonoBehaviour
 
     [SerializeField] private GameObject successRange;
     [SerializeField] private Slider slider;
-    [SerializeField] private float sliderSpeed;
-    [SerializeField] private float successRangeValue;
+    [Range(0f, 100f)][SerializeField] private float sliderSpeed;
+    [Range(0f, 100f)][SerializeField] private float successRangeValue;
     private RectTransform sliderRectTransform;
     private bool _sliderMoveRight = true;
     private float _random;
@@ -36,8 +35,8 @@ public class ZavodHandler : MonoBehaviour
     [SerializeField] private Text neededIdText;
     [SerializeField] private RectTransform spawnPoint;
     [SerializeField] private GameObject line;
-    [SerializeField] private float lineSpeed;
-    [SerializeField] private int winScore;
+    [Range(0f, 100f)][SerializeField] private float lineSpeed;
+    [Range(0, 100)][SerializeField] private int winScore;
     private int _score = 0;
     private bool _canMoveLine = false;
     private int _neededId;

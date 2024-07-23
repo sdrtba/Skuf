@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class ShotHandler : MonoBehaviour
 {
-    void Start()
-    {
-        StartCoroutine(Delete());
-    }
+    private void Start() => StartCoroutine(Delete());
 
     private IEnumerator Delete()
     {

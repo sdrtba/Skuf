@@ -4,8 +4,8 @@ public class ShopHandler : MonoBehaviour
 {
     [SerializeField] private GameObject bear;
     [SerializeField] private GameObject food;
-    [SerializeField] private int bearPrice;
-    [SerializeField] private int foodPrice;
+    [Range(0, 100)][SerializeField] private int bearPrice;
+    [Range(0, 100)][SerializeField] private int foodPrice;
 
     public void BuyBear()
     {

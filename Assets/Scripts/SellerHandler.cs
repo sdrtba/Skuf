@@ -23,9 +23,9 @@ public class SellerHandler : MonoBehaviour
     [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text doneText;
     [SerializeField] private Text scoreText;
-    [SerializeField] private int winScore;
-    [SerializeField] private int hungerImpact;
-    [SerializeField] private int moneyImpact;
+    [Range(0, 100)][SerializeField] private int winScore;
+    [Range(0, 100)][SerializeField] private int hungerImpact;
+    [Range(0, 100)][SerializeField] private int moneyImpact;
     private Vector3 _defParentPosition;
     private Arrow _curArrow;
     private float _score;

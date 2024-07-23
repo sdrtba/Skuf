@@ -7,9 +7,9 @@ public class FreezeHandler : MonoBehaviour
     [SerializeField] private GameObject food;
     [SerializeField] private Text bearText;
     [SerializeField] private Text foodText;
-    [SerializeField] private int bearImpact;
-    [SerializeField] private int foodImpact;
-    [SerializeField] private int foodExtraImpact;
+    [Range(0, 100)][SerializeField] private int bearImpact;
+    [Range(0, 100)][SerializeField] private int foodImpact;
+    [Range(0, 100)][SerializeField] private int foodExtraImpact;
 
     private void Start()
     {

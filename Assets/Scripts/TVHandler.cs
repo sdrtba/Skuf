@@ -3,14 +3,14 @@ using UnityEngine;
 public class TVHandler : MonoBehaviour
 {
     [SerializeField] private GameObject skuf;
-    [SerializeField] private int hungerByScoreImpact;
-    [SerializeField] private float speed;
+    [Range(0, 100)][SerializeField] private int hungerByScoreImpact;
+    [Range(0f, 100f)][SerializeField] private float speed;
     private bool _isActive = false;
     private float _defSpeed;
 
-    public void ToggleActive() => _isActive = !_isActive;
-
     private void Start() => _defSpeed = speed;
+
+    public void ToggleActive() => _isActive = !_isActive;
 
     private void FixedUpdate()
     {

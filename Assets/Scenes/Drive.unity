@@ -821,11 +821,11 @@ MonoBehaviour:
   hungerCanvas: {fileID: 2069008124}
   doneCanvas: {fileID: 1660047696}
   doneText: {fileID: 1295856635}
-  backGround: {fileID: 1142107538}
-  driver: {fileID: 33078734}
   unactiveObjects:
   - {fileID: 1390191669}
   - {fileID: 2016230857}
+  backGround: {fileID: 1142107538}
+  driver: {fileID: 33078734}
   slider: {fileID: 433726104}
   moneyImpact: 25
   hungerImpact: 10

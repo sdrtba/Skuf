@@ -11,12 +11,12 @@ public class TanksHandler : MonoBehaviour
     [SerializeField] private GameObject aim;
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Text scoreText;
-    [SerializeField] private float damage;
-    [SerializeField] private float aimSpeed;
-    [SerializeField] private int winScore;
-    [SerializeField] private int hungerImpact;
-    [SerializeField] private int scoreImpact;
-    [SerializeField] private int loseScoreImpact;
+    [Range(0f, 100f)][SerializeField] private float damage;
+    [Range(0f, 1000f)][SerializeField] private float aimSpeed;
+    [Range(0, 100)][SerializeField] private int winScore;
+    [Range(0, 100)][SerializeField] private int hungerImpact;
+    [Range(0, 100)][SerializeField] private int scoreImpact;
+    [Range(0, 100)][SerializeField] private int loseScoreImpact;
     private Rigidbody2D _aimRb;
     private float _horizontal;
     private float _vertical;
