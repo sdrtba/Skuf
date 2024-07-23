@@ -20,6 +20,7 @@ public class DriveHandler : MonoBehaviour
 
     private void Start()
     {
+        SkufHandler.instance.SetHUDVisibility(false);
         if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
 
         doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());

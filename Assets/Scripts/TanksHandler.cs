@@ -26,6 +26,8 @@ public class TanksHandler : MonoBehaviour
 
     private void Start()
     {
+        SkufHandler.instance.SetHUDVisibility(false);
+
         if (SkufHandler.instance.hunger <= 0)
         {
             TankScript._tankActive = false;

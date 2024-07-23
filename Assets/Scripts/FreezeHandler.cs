@@ -13,6 +13,7 @@ public class FreezeHandler : MonoBehaviour
 
     private void Start()
     {
+        SkufHandler.instance.SetHUDVisibility(true);
         ChangeFreeze();
     }
 

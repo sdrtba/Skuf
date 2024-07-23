@@ -7,6 +7,11 @@ public class ShopHandler : MonoBehaviour
     [Range(0, 100)][SerializeField] private int bearPrice;
     [Range(0, 100)][SerializeField] private int foodPrice;
 
+    private void Start()
+    {
+        SkufHandler.instance.SetHUDVisibility(true);
+    }
+
     public void BuyBear()
     {
         if (SkufHandler.instance.CanBuy(bearPrice))

@@ -8,7 +8,11 @@ public class TVHandler : MonoBehaviour
     private bool _isActive = false;
     private float _defSpeed;
 
-    private void Start() => _defSpeed = speed;
+    private void Start()
+    {
+        SkufHandler.instance.SetHUDVisibility(true);
+        _defSpeed = speed;
+    }
 
     public void ToggleActive() => _isActive = !_isActive;
 

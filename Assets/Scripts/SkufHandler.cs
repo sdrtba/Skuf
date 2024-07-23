@@ -1,34 +1,37 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SkufHandler : MonoBehaviour
 {
     public static SkufHandler instance = null;
 
+    [SerializeField] private Canvas HUDCanvas;
     [SerializeField] private Slider scoreSlider;
     [SerializeField] private Slider hungerSlider;
     [SerializeField] private Text moneyText;
 
-    public int score;
-    public int hunger;
-    public int money;
-    public int bearCount;
-    public int foodCount;
+    [NonSerialized]public int score;
+    [NonSerialized] public int hunger;
+    [NonSerialized] public int money;
+    [NonSerialized] public int bearCount;
+    [NonSerialized] public int foodCount;
 
-    public int maxScore = 600;
-    public int maxHunger = 150;
-    public int minScore = 0;
-    public int minHunger = 0;
+    [NonSerialized] public int maxScore = 600;
+    [NonSerialized] public int maxHunger = 150;
+    [NonSerialized] public int minScore = 0;
+    [NonSerialized] public int minHunger = 0;
 
-    public bool isBirdActive = true;
-    private int _birdRegen = 10; //?
-    private int _birdHungerImpact = 20; //?
-    private int _birdScoreImpact = 10; //?
+    [NonSerialized] public bool isBirdActive = true;
+    [Range(0,100)][SerializeField] private int birdRegen;
+    [Range(0, 100)][SerializeField] private int birdHungerImpact;
+    [Range(0, 100)][SerializeField] private int birdScoreImpact;
 
 
 
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -61,6 +64,12 @@ public class SkufHandler : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.K)) ChangeHunger(-10);
         else if (Input.GetKeyDown(KeyCode.P)) ChangeMoney(13);
         else if (Input.GetKeyDown(KeyCode.L)) ChangeMoney(-13);
+        else if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(0);
+    }
+
+    public void SetHUDVisibility(bool isEnable)
+    {
+        HUDCanvas.enabled = isEnable;
     }
 
     public void ChangeScore(int count)
@@ -99,9 +108,9 @@ public class SkufHandler : MonoBehaviour
     private IEnumerator EatBirdC()
     {
         isBirdActive = false;
-        ChangeHunger(_birdHungerImpact);
-        ChangeScore(_birdScoreImpact);
-        yield return new WaitForSeconds(_birdRegen);
+        ChangeHunger(birdHungerImpact);
+        ChangeScore(birdScoreImpact);
+        yield return new WaitForSeconds(birdRegen);
 
         isBirdActive = true;
     }

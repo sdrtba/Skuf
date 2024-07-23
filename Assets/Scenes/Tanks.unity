@@ -500,10 +500,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
+  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
+  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1520231014}
   deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
-  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   speed: 1
   cooldown: 2
   maxDelay: 5
@@ -653,10 +654,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
+  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
+  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1984121325}
   deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
-  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   speed: 1
   cooldown: 2
   maxDelay: 5
@@ -909,10 +911,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
+  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
+  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 782700449}
   deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
-  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   speed: 1
   cooldown: 2
   maxDelay: 5
@@ -1908,10 +1911,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
+  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
+  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1984156817}
   deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
-  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   speed: 1
   cooldown: 2
   maxDelay: 5
@@ -2302,10 +2306,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
+  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
+  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1986876048}
   deadSprite: {fileID: 21300000, guid: 3d68a8e06fb4d8941bda647ef3b02ab5, type: 3}
-  shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   speed: 1
   cooldown: 2
   maxDelay: 5

@@ -7,6 +7,7 @@ public class BirdHandler : MonoBehaviour
 
     private void Start()
     {
+        SkufHandler.instance.SetHUDVisibility(true);
         if (!SkufHandler.instance.isBirdActive) bird.SetActive(false);
         if (SkufHandler.instance.hunger > 0) bird.GetComponent<Button>().interactable = false;
     }

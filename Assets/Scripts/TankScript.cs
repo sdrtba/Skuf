@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class TankScript : MonoBehaviour
 {
     [SerializeField] private TanksHandler tanksHandler;
+    [SerializeField] private AudioClip damageClip;
     [SerializeField] private GameObject aim;
     [SerializeField] private GameObject shot;
     [SerializeField] private Transform newPos;
@@ -90,6 +91,7 @@ public class TankScript : MonoBehaviour
         _isUping = false;
         _isShooting = false;
         _isDowing = true;
+        SoundManager.instance.PlayAudioClip(damageClip, transform, 1f);
         ChangeSprite();
     }
 
