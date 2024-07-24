@@ -49,7 +49,7 @@ public class ZavodHandler : MonoBehaviour
         doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
 
 
-        prevBtn.enabled = false;
+        prevBtn.interactable = false;
         sliderRectTransform = slider.GetComponent<RectTransform>();
 
         SetNeededId();
@@ -154,12 +154,12 @@ public class ZavodHandler : MonoBehaviour
 
     private void CheckButton()
     {
-        if (_id == maxSize) nextBtn.enabled = false;
-        else if (_id == 0) prevBtn.enabled = false;
+        if (_id == maxSize) nextBtn.interactable = false;
+        else if (_id == 0) prevBtn.interactable = false;
         else
         {
-            nextBtn.enabled = true;
-            prevBtn.enabled = true;
+            nextBtn.interactable = true;
+            prevBtn.interactable = true;
         }
     }
 
