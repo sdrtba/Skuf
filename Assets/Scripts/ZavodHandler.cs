@@ -30,6 +30,7 @@ public class ZavodHandler : MonoBehaviour
     private bool _sliderMoveRight = true;
     private float _random;
 
+    [SerializeField] private RectTransform lineObject;
     [SerializeField] private GameObject[] itemSprites;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text neededIdText;
@@ -90,6 +91,7 @@ public class ZavodHandler : MonoBehaviour
         if (_canMoveLine)
         {
             line.transform.position -= new Vector3(Time.deltaTime * lineSpeed, 0, 0);
+            lineObject.sizeDelta += new Vector2(Time.deltaTime * lineSpeed * 108, 0);
         }
     }
 
