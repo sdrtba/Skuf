@@ -18,7 +18,7 @@ public class ZavodHandler : MonoBehaviour
     [Range(0f, 100f)][SerializeField] private float speed;
     private bool _moveLeft = false;
     private bool _moveRight = false;
-    private int maxSize = 3;
+    private int _maxSize = 3;
     private int _id = 0;
 
 
@@ -26,14 +26,13 @@ public class ZavodHandler : MonoBehaviour
     [SerializeField] private Slider slider;
     [Range(0f, 100f)][SerializeField] private float sliderSpeed;
     [Range(0f, 100f)][SerializeField] private float successRangeValue;
-    private RectTransform sliderRectTransform;
+    private RectTransform _sliderRectTransform;
     private bool _sliderMoveRight = true;
     private float _random;
 
     [SerializeField] private RectTransform lineObject;
     [SerializeField] private GameObject[] itemSprites;
     [SerializeField] private Text scoreText;
-    [SerializeField] private Text neededIdText;
     [SerializeField] private RectTransform spawnPoint;
     [SerializeField] private GameObject line;
     [Range(0f, 100f)][SerializeField] private float lineSpeed;
@@ -49,11 +48,9 @@ public class ZavodHandler : MonoBehaviour
         if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
         doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
 
-
         prevBtn.interactable = false;
-        sliderRectTransform = slider.GetComponent<RectTransform>();
+        _sliderRectTransform = slider.GetComponent<RectTransform>();
 
-        SetNeededId();
         ChangeRange();
     }
 
@@ -102,18 +99,12 @@ public class ZavodHandler : MonoBehaviour
         _canMoveLine = false;
     }
 
-    private void SetNeededId()
-    {
-        _neededId = Random.Range(0, maxSize + 1);
-        neededIdText.text = "Need: " + _neededId;
-    }
-
     public void BtnPressed()
     {
         if (slider.value >= _random && slider.value <= _random + successRangeValue && _id == _neededId)
         {
             _score += 1;
-            scoreText.text = "Score: " + _score + "/" + winScore;
+            scoreText.text = _score + "/" + winScore;
             Instantiate(itemSprites[_id], spawnPoint.position, Quaternion.identity, line.transform);
 
             if (_score >= winScore)
@@ -124,18 +115,19 @@ public class ZavodHandler : MonoBehaviour
             }
         }
         else Instantiate(itemSprites[itemSprites.Length - 1], spawnPoint.position, Quaternion.identity, line.transform);
-        SetNeededId();
         ChangeRange();
         StartCoroutine(MoveLine());
     }
 
     private void ChangeRange()
     {
+        _neededId = Random.Range(0, _maxSize + 1);
+
         _random = Random.Range(0, 1 - successRangeValue);
         RectTransform successRangeRectTransform = successRange.GetComponent<RectTransform>();
 
-        successRangeRectTransform.sizeDelta = new Vector2(sliderRectTransform.sizeDelta.x * successRangeValue, successRangeRectTransform.sizeDelta.y);
-        successRangeRectTransform.anchoredPosition = new Vector3(_random * sliderRectTransform.sizeDelta.x, 0, 0);
+        successRangeRectTransform.sizeDelta = new Vector2(_sliderRectTransform.sizeDelta.x * successRangeValue, successRangeRectTransform.sizeDelta.y);
+        successRangeRectTransform.anchoredPosition = new Vector3(_random * _sliderRectTransform.sizeDelta.x, 0, 0);
     }
 
     public void Next()
@@ -156,7 +148,7 @@ public class ZavodHandler : MonoBehaviour
 
     private void CheckButton()
     {
-        if (_id == maxSize) nextBtn.interactable = false;
+        if (_id == _maxSize) nextBtn.interactable = false;
         else if (_id == 0) prevBtn.interactable = false;
         else
         {
@@ -164,6 +156,4 @@ public class ZavodHandler : MonoBehaviour
             prevBtn.interactable = true;
         }
     }
-
-    
 }
