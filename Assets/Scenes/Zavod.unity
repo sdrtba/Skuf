@@ -2458,7 +2458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239073650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb7892178a267f74abb433bb285d6b29, type: 3}
+  m_Script: {fileID: 11500000, guid: d26b02b47d214084c80d2992850ebee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hungerCanvas: {fileID: 692441813}
@@ -2495,7 +2495,6 @@ MonoBehaviour:
   prefabsParentTransform: {fileID: 1202699228}
   waitingTransform: {fileID: 87960426}
   prefabsSpeed: 7
-  lineObject: {fileID: 1825606039}
   itemsParent: {fileID: 688743808}
   imageItemsPoints:
   - {fileID: 1400030725}
@@ -2504,7 +2503,7 @@ MonoBehaviour:
   - {fileID: 1098123514}
   nextBtn: {fileID: 1704144086}
   prevBtn: {fileID: 1000537164}
-  itemsSpeed: 30
+  itemsSpeed: 7
   slider: {fileID: 1896995515}
   successRange: {fileID: 1821433531}
   sliderSpeed: 1
