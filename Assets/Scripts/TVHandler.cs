@@ -14,7 +14,10 @@ public class TVHandler : MonoBehaviour
         _defSpeed = speed;
     }
 
-    public void ToggleActive() => _isActive = !_isActive;
+    public void ToggleActive()
+    {
+        _isActive = !_isActive;
+    }
 
     private void FixedUpdate()
     {

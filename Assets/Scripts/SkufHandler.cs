@@ -37,7 +37,7 @@ public class SkufHandler : MonoBehaviour
         {
             instance = this;
         }
-        else if (instance == this)
+        else
         {
             Destroy(gameObject);
         }
