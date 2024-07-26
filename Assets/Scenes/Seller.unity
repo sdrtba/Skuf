@@ -1329,6 +1329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8c703c7123d134489b3c9d9b069dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bipClip: {fileID: 8300000, guid: 47b20788593dd614bb838c34ff6b6c75, type: 3}
+  clipVolume: 0.5
   line: {fileID: 2104925721}
   itemsParent: {fileID: 1155289457}
   curItems:

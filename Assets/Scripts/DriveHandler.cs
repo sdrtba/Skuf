@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 public class DriveHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip clip;
+    [Range(0f,1f)][SerializeField] private float clipVolume;
+
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text doneText;
@@ -16,6 +19,7 @@ public class DriveHandler : MonoBehaviour
     private bool _isDrive = false;
     private Animator _driveAnimator;
     private Animation _backgroundAnimation;
+    private AudioSource _audioSource;
 
 
     private void Start()
@@ -26,6 +30,10 @@ public class DriveHandler : MonoBehaviour
         doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
         _driveAnimator = driver.gameObject.GetComponent<Animator>();
         _backgroundAnimation = backGround.GetComponent<Animation>();
+
+        _audioSource = SoundManager.instance.PlayAudioClip(clip, transform, clipVolume, false);
+        _audioSource.loop = true;
+        _audioSource.Stop();
     }
 
     private void FixedUpdate()
@@ -44,6 +52,8 @@ public class DriveHandler : MonoBehaviour
 
                 SkufHandler.instance.ChangeMoney(moneyImpact);
                 SkufHandler.instance.ChangeHunger(-hungerImpact);
+
+                _audioSource.Stop();
             }
         }
     }
@@ -58,5 +68,7 @@ public class DriveHandler : MonoBehaviour
 
         _driveAnimator.SetBool("isDrive", true);
         _backgroundAnimation.Play();
+
+        _audioSource.Play();
     }
 }

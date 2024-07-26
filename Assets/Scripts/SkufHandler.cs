@@ -25,7 +25,9 @@ public class SkufHandler : MonoBehaviour
     [NonSerialized] public int minHunger = 0;
 
     [NonSerialized] public bool isBirdActive = true;
-    [Range(0,100)][SerializeField] private int birdRegen;
+    [SerializeField] private AudioClip eatClip;
+    [Range(0f, 1f)][SerializeField] private float clipVolume;
+    [Range(0, 100)][SerializeField] private int birdRegen;
     [Range(0, 100)][SerializeField] private int birdHungerImpact;
     [Range(0, 100)][SerializeField] private int birdScoreImpact;
 
@@ -107,6 +109,8 @@ public class SkufHandler : MonoBehaviour
 
     private IEnumerator EatBirdC()
     {
+        SoundManager.instance.PlayAudioClip(eatClip, transform, clipVolume);
+
         isBirdActive = false;
         ChangeHunger(birdHungerImpact);
         ChangeScore(birdScoreImpact);

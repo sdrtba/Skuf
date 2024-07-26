@@ -818,6 +818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2287d84df77b0434f83ecb4374d4d03f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 77b09cc2cb2b9c441b7e24e4956367f9, type: 3}
+  clipVolume: 0.5
   hungerCanvas: {fileID: 2069008124}
   doneCanvas: {fileID: 1660047696}
   doneText: {fileID: 1295856635}

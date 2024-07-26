@@ -3,6 +3,10 @@ using UnityEngine.UI;
 
 public class FreezeHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip eatClip;
+    [SerializeField] private AudioClip drinkClip;
+    [Range(0f, 1f)][SerializeField] private float clipVolume;
+
     [SerializeField] private GameObject bear;
     [SerializeField] private GameObject food;
     [SerializeField] private Text bearText;
@@ -29,6 +33,8 @@ public class FreezeHandler : MonoBehaviour
     {
         if (SkufHandler.instance.score != SkufHandler.instance.maxScore)
         {
+            SoundManager.instance.PlayAudioClip(drinkClip, transform, clipVolume);
+
             SkufHandler.instance.bearCount--;
             SkufHandler.instance.ChangeScore(bearImpact);
             ChangeFreeze();
@@ -40,6 +46,8 @@ public class FreezeHandler : MonoBehaviour
         if (SkufHandler.instance.hunger != SkufHandler.instance.maxHunger)
         {
             if (SkufHandler.instance.hunger > SkufHandler.instance.maxHunger * 0.66) SkufHandler.instance.ChangeScore(foodExtraImpact);
+
+            SoundManager.instance.PlayAudioClip(eatClip, transform, clipVolume);
 
             SkufHandler.instance.foodCount--;
             SkufHandler.instance.ChangeHunger(foodImpact);

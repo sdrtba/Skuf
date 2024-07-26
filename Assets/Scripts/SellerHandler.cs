@@ -13,6 +13,9 @@ public enum Arrow
 
 public class SellerHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip bipClip;
+    [Range(0f, 1f)][SerializeField] private float clipVolume;
+
     [SerializeField] private RectTransform line;
     [SerializeField] private GameObject itemsParent;
     [SerializeField] private GameObject[] curItems;
@@ -103,6 +106,8 @@ public class SellerHandler : MonoBehaviour
 
     private void ArrowClick()
     {
+        SoundManager.instance.PlayAudioClip(bipClip, transform, clipVolume);
+
         StartCoroutine(Move());
         _curArrow = GetCurArrow();
 

@@ -1652,6 +1652,8 @@ MonoBehaviour:
   scoreSlider: {fileID: 1315253024}
   hungerSlider: {fileID: 1463926097}
   moneyText: {fileID: 19217184}
+  eatClip: {fileID: 8300000, guid: 88522cb5e735e2546a81b8447d68f3c3, type: 3}
+  clipVolume: 0.5
   birdRegen: 10
   birdHungerImpact: 20
   birdScoreImpact: 10
