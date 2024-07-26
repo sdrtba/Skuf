@@ -62,7 +62,7 @@ public class ZavodHandler : MonoBehaviour
         {
             rand = Random.Range(0, items.Length);
             id.Add(rand);
-            Instantiate(items[rand], prefabs[i].transform);
+            Instantiate(items[rand], prefabs[i].transform).GetComponent<Image>().raycastTarget = false;
         }
 
         ChangeRange();

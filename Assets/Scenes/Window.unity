@@ -442,6 +442,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bird: {fileID: 470540131}
+  regenTime: 10
+  hungerImpact: 25
+  scoreImpact: 10
+  clip: {fileID: 8300000, guid: 88522cb5e735e2546a81b8447d68f3c3, type: 3}
+  clipVolume: 0.5
 --- !u!1 &940811565
 GameObject:
   m_ObjectHideFlags: 0

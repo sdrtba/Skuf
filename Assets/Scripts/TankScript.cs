@@ -21,6 +21,7 @@ public class TankScript : MonoBehaviour
     private bool _isDowing = false;
     private float _time = 0;
     private bool _canShoot = false;
+    private bool _isShoted = false;
     public static bool _tankActive = true;
 
     private void Start()
@@ -67,13 +68,14 @@ public class TankScript : MonoBehaviour
                         _isDowing = false;
                         _isShooting = false;
                         _isUping = true;
+                        _isShoted = false;
                         _timer = Random.Range(0, maxDelay);
                         ChangeSprite();
                     }
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && _canShoot)
+            if (Input.GetKeyDown(KeyCode.Space) && _canShoot && !_isShoted)
             {
                 Die();
                 if (tanksHandler.IncreaseScore()) Stop();
@@ -88,6 +90,7 @@ public class TankScript : MonoBehaviour
 
     private void Die()
     {
+        _isShoted = true;
         _isUping = false;
         _isShooting = false;
         _isDowing = true;

@@ -25,12 +25,6 @@ public class SkufHandler : MonoBehaviour
     [NonSerialized] public int minHunger = 0;
 
     [NonSerialized] public bool isBirdActive = true;
-    [SerializeField] private AudioClip eatClip;
-    [Range(0f, 1f)][SerializeField] private float clipVolume;
-    [Range(0, 100)][SerializeField] private int birdRegen;
-    [Range(0, 100)][SerializeField] private int birdHungerImpact;
-    [Range(0, 100)][SerializeField] private int birdScoreImpact;
-
 
 
     void Awake()
@@ -105,17 +99,9 @@ public class SkufHandler : MonoBehaviour
         moneyText.text = money.ToString();
     }
 
-    public void EatBird() => StartCoroutine(EatBirdC());
-
-    private IEnumerator EatBirdC()
+    public IEnumerator EatBird(int regenTime)
     {
-        SoundManager.instance.PlayAudioClip(eatClip, transform, clipVolume);
-
-        isBirdActive = false;
-        ChangeHunger(birdHungerImpact);
-        ChangeScore(birdScoreImpact);
-        yield return new WaitForSeconds(birdRegen);
-
+        yield return new WaitForSeconds(regenTime);
         isBirdActive = true;
     }
 }
