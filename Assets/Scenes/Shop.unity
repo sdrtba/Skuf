@@ -865,6 +865,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355e96825bbddcc4883dd668c72d28ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backClip: {fileID: 8300000, guid: e0fbe1fff71c686449668d9c61838863, type: 3}
+  openClip: {fileID: 8300000, guid: 2c52ce20c866c754a8879c21f6cc6929, type: 3}
   buyClip: {fileID: 8300000, guid: 702ac29913844ca43b244b8c1a4acd0d, type: 3}
   deniedClip: {fileID: 8300000, guid: beed0fbcb0357ea47a47905654f36d89, type: 3}
   clipVolume: 0.5

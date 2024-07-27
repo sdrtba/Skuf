@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public class FreezeHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip openClip;
     [SerializeField] private AudioClip eatClip;
-    [SerializeField] private AudioClip drinkClip;
+    [SerializeField] private AudioClip[] drinkClip;
     [Range(0f, 1f)][SerializeField] private float clipVolume;
 
     [SerializeField] private GameObject bear;
@@ -15,10 +16,14 @@ public class FreezeHandler : MonoBehaviour
     [Range(0, 100)][SerializeField] private int foodImpact;
     [Range(0, 100)][SerializeField] private int foodExtraImpact;
 
+    private AudioSource _drinkAudioSourceInstance;
+    private AudioSource _eatAudioSourceInstance;
+
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(true);
-        ChangeFreeze();
+        SoundManager.instance.PlayAudioClip(openClip, transform, clipVolume);
+        ChangeFreeze(); 
     }
 
     private void ChangeFreeze()
@@ -33,7 +38,11 @@ public class FreezeHandler : MonoBehaviour
     {
         if (SkufHandler.instance.score != SkufHandler.instance.maxScore)
         {
-            SoundManager.instance.PlayAudioClip(drinkClip, transform, clipVolume);
+            if (_drinkAudioSourceInstance == null)
+            {
+                _drinkAudioSourceInstance = SoundManager.instance.PlayAudioClip(drinkClip, transform, clipVolume, false);
+                Destroy(_drinkAudioSourceInstance, _drinkAudioSourceInstance.clip.length);
+            }
 
             SkufHandler.instance.bearCount--;
             SkufHandler.instance.ChangeScore(bearImpact);
@@ -47,7 +56,11 @@ public class FreezeHandler : MonoBehaviour
         {
             if (SkufHandler.instance.hunger > SkufHandler.instance.maxHunger * 0.66) SkufHandler.instance.ChangeScore(foodExtraImpact);
 
-            SoundManager.instance.PlayAudioClip(eatClip, transform, clipVolume);
+            if (_eatAudioSourceInstance == null)
+            {
+                _eatAudioSourceInstance = SoundManager.instance.PlayAudioClip(eatClip, transform, clipVolume, false);
+                Destroy(_eatAudioSourceInstance, _eatAudioSourceInstance.clip.length);
+            }
 
             SkufHandler.instance.foodCount--;
             SkufHandler.instance.ChangeHunger(foodImpact);

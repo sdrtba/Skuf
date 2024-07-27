@@ -101,6 +101,7 @@ public class SkufHandler : MonoBehaviour
 
     public IEnumerator EatBird(int regenTime)
     {
+        isBirdActive = false;
         yield return new WaitForSeconds(regenTime);
         isBirdActive = true;
     }

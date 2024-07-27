@@ -14,6 +14,9 @@ public enum Arrow
 public class SellerHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip bipClip;
+    [SerializeField] private AudioClip purchaseClip;
+    [SerializeField] private AudioClip conveyerClip;
+    [SerializeField] private AudioClip backClip;
     [Range(0f, 1f)][SerializeField] private float clipVolume;
 
     [SerializeField] private RectTransform line;
@@ -42,6 +45,10 @@ public class SellerHandler : MonoBehaviour
 
         doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
         _defParentPosition = itemsParent.transform.position;
+
+        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, clipVolume, false);
+        audioSource.loop = true;
+
         CreateClient();
     }
 
@@ -133,6 +140,7 @@ public class SellerHandler : MonoBehaviour
             }
             else
             {
+                SoundManager.instance.PlayAudioClip(purchaseClip, transform, clipVolume);
                 CreateClient();
             }
         }
@@ -140,6 +148,7 @@ public class SellerHandler : MonoBehaviour
 
     private IEnumerator Move()
     {
+        AudioSource audioSource = SoundManager.instance.PlayAudioClip(conveyerClip, transform, clipVolume, false);
         float newPos = itemsParent.transform.position.x - 1f;
         while (itemsParent.transform.position.x >= newPos)
         {
@@ -149,5 +158,6 @@ public class SellerHandler : MonoBehaviour
 
             yield return new WaitForSeconds(0.02f);
         }
+        audioSource.Stop();
     }
 }

@@ -574,8 +574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcf20d51f465834eb0551055e6dc368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eatClip: {fileID: 8300000, guid: 88522cb5e735e2546a81b8447d68f3c3, type: 3}
-  drinkClip: {fileID: 8300000, guid: bd132277b0aa37c4194095c3a722fc0d, type: 3}
+  openClip: {fileID: 8300000, guid: 549e697596fc3314c97b7606b30b8445, type: 3}
+  eatClip: {fileID: 8300000, guid: 0d17e54c0fb56794a8a84c0ffe931948, type: 3}
+  drinkClip:
+  - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
+  - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
+  - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
+  - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
+  - {fileID: 8300000, guid: bbcfca6245e84794c82201e30f5f4cfa, type: 3}
   clipVolume: 1
   bear: {fileID: 270042845}
   food: {fileID: 779669811}

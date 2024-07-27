@@ -500,7 +500,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
-  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
   shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1520231014}
@@ -654,7 +653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
-  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
   shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1984121325}
@@ -911,7 +909,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
-  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
   shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 782700449}
@@ -1911,7 +1908,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
-  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
   shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1984156817}
@@ -2306,7 +2302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanksHandler: {fileID: 1431462017}
-  damageClip: {fileID: 8300000, guid: 3ca507856a7e4d6479dc6787963a4679, type: 3}
   aim: {fileID: 632255705}
   shot: {fileID: 2770154762235536344, guid: 1e284adda9b47e24087c91074e84d60b, type: 3}
   newPos: {fileID: 1986876048}
@@ -2641,6 +2636,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b84d18ce4a38dc47a07452a394acc4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDeadClip: {fileID: 8300000, guid: cfdbeb4fa56b7834ab98d04672a2bff2, type: 3}
+  windClip: {fileID: 8300000, guid: ebaf691f6839bcc49b007326cda909bd, type: 3}
+  tanksClip: {fileID: 8300000, guid: 2a789148fad4da941979cc36f278d75d, type: 3}
+  deadClip:
+  - {fileID: 8300000, guid: 6256a5cea2526a54e9b9d0b3f80dca12, type: 3}
+  shotClip:
+  - {fileID: 8300000, guid: 59d198a748b988348acca9a310dd1d7d, type: 3}
+  clipVolume: 0.5
   loseText: {fileID: 1878488733}
   winText: {fileID: 1432855592}
   loseCanvas: {fileID: 615086094}

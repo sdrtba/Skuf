@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ShopHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip backClip;
+    [SerializeField] private AudioClip openClip;
     [SerializeField] private AudioClip buyClip;
     [SerializeField] private AudioClip deniedClip;
     [Range(0f, 1f)][SerializeField] private float clipVolume;
@@ -14,6 +16,10 @@ public class ShopHandler : MonoBehaviour
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(true);
+        SoundManager.instance.PlayAudioClip(openClip, transform, clipVolume);
+
+        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, clipVolume, false);
+        audioSource.loop = true;
     }
 
     public void BuyBear()

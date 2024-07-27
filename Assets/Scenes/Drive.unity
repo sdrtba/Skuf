@@ -818,7 +818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2287d84df77b0434f83ecb4374d4d03f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 77b09cc2cb2b9c441b7e24e4956367f9, type: 3}
+  backClip: {fileID: 8300000, guid: 0d35dfba447173545a437bd0b3144231, type: 3}
+  driveClip: {fileID: 8300000, guid: cd79a00d52eb42f4b80534143ad8d8b2, type: 3}
   clipVolume: 0.5
   hungerCanvas: {fileID: 2069008124}
   doneCanvas: {fileID: 1660047696}

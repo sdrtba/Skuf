@@ -3,6 +3,15 @@ using UnityEngine.UI;
 
 public class TanksHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip enemyDeadClip;
+    [SerializeField] private AudioClip windClip;
+    [SerializeField] private AudioClip tanksClip;
+    [SerializeField] private AudioClip[] deadClip;
+    [SerializeField] private AudioClip[] shotClip;
+    [Range(0f, 1f)][SerializeField] private float clipVolume;
+
+
+
     [SerializeField] private Text loseText;
     [SerializeField] private Text winText;
     [SerializeField] private GameObject loseCanvas;
@@ -39,6 +48,11 @@ public class TanksHandler : MonoBehaviour
         winText.text = winText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", scoreImpact.ToString());
 
         _aimRb = aim.GetComponent<Rigidbody2D>();
+
+        AudioSource windAudioSource = SoundManager.instance.PlayAudioClip(tanksClip, transform, clipVolume, false);
+        windAudioSource.loop = true;
+        AudioSource tanksAudioSource = SoundManager.instance.PlayAudioClip(windClip, transform, clipVolume, false);
+        tanksAudioSource.loop = true;
     }
 
     private void Update()
@@ -52,11 +66,13 @@ public class TanksHandler : MonoBehaviour
 
     public bool GetDamage()
     {
+        SoundManager.instance.PlayAudioClip(shotClip, transform, clipVolume);
         hpSlider.value -= damage;
         if (hpSlider.value <= 0)
         {
             _active = false;
             loseCanvas.SetActive(true);
+            SoundManager.instance.PlayAudioClip(deadClip, transform, clipVolume);
             SkufHandler.instance.ChangeHunger(-hungerImpact);
             SkufHandler.instance.ChangeScore(-loseScoreImpact);
 
@@ -67,6 +83,8 @@ public class TanksHandler : MonoBehaviour
 
     public bool IncreaseScore()
     {
+        SoundManager.instance.PlayAudioClip(enemyDeadClip, transform, clipVolume);
+        SoundManager.instance.PlayAudioClip(deadClip, transform, clipVolume);
         score += 1;
         scoreText.text = $"{score}/{winScore}";
         if (score >= winScore) {
