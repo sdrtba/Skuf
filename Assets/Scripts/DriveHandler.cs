@@ -4,8 +4,9 @@ using UnityEngine.UI;
 public class DriveHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip backClip;
+    [Range(0f,1f)][SerializeField] private float backClipVolume;
     [SerializeField] private AudioClip driveClip;
-    [Range(0f,1f)][SerializeField] private float clipVolume;
+    [Range(0f,1f)][SerializeField] private float driveClipVolume;
 
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
@@ -32,11 +33,11 @@ public class DriveHandler : MonoBehaviour
         _driveAnimator = driver.gameObject.GetComponent<Animator>();
         _backgroundAnimation = backGround.GetComponent<Animation>();
 
-        _audioSource = SoundManager.instance.PlayAudioClip(driveClip, transform, clipVolume, false);
+        _audioSource = SoundManager.instance.PlayAudioClip(driveClip, transform, driveClipVolume, false);
         _audioSource.loop = true;
         _audioSource.Stop();
 
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, clipVolume, false);
+        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
         audioSource.loop = true;
     }
 

@@ -1329,11 +1329,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8c703c7123d134489b3c9d9b069dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bipClip: {fileID: 8300000, guid: 47b20788593dd614bb838c34ff6b6c75, type: 3}
-  purchaseClip: {fileID: 8300000, guid: 9483ab8b9df55ff4993c3f1d7f9451d2, type: 3}
+  peepClip: {fileID: 8300000, guid: b1185a392d6898545942cb81e3e2d7e7, type: 3}
+  peepClipVolume: 0.5
+  purchaseClip: {fileID: 8300000, guid: 47b20788593dd614bb838c34ff6b6c75, type: 3}
+  purchaseClipVolume: 0.5
   conveyerClip: {fileID: 8300000, guid: 42f7e13eeddbd8b4e8625ee2d60171fc, type: 3}
+  conveyerClipVolume: 0.4
   backClip: {fileID: 8300000, guid: e0fbe1fff71c686449668d9c61838863, type: 3}
-  clipVolume: 0.5
+  backClipVolume: 0.1
   line: {fileID: 2104925721}
   itemsParent: {fileID: 1155289457}
   curItems:

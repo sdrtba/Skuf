@@ -819,8 +819,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backClip: {fileID: 8300000, guid: 0d35dfba447173545a437bd0b3144231, type: 3}
+  backClipVolume: 0.2
   driveClip: {fileID: 8300000, guid: cd79a00d52eb42f4b80534143ad8d8b2, type: 3}
-  clipVolume: 0.5
+  driveClipVolume: 0.5
   hungerCanvas: {fileID: 2069008124}
   doneCanvas: {fileID: 1660047696}
   doneText: {fileID: 1295856635}

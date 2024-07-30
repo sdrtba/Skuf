@@ -13,11 +13,14 @@ public enum Arrow
 
 public class SellerHandler : MonoBehaviour
 {
-    [SerializeField] private AudioClip bipClip;
+    [SerializeField] private AudioClip peepClip;
+    [Range(0f, 1f)][SerializeField] private float peepClipVolume;
     [SerializeField] private AudioClip purchaseClip;
-    [SerializeField] private AudioClip conveyerClip;
+    [Range(0f, 1f)][SerializeField] private float purchaseClipVolume;
+/*    [SerializeField] private AudioClip conveyerClip;
+    [Range(0f, 1f)][SerializeField] private float conveyerClipVolume;*/
     [SerializeField] private AudioClip backClip;
-    [Range(0f, 1f)][SerializeField] private float clipVolume;
+    [Range(0f, 1f)][SerializeField] private float backClipVolume;
 
     [SerializeField] private RectTransform line;
     [SerializeField] private GameObject itemsParent;
@@ -46,7 +49,7 @@ public class SellerHandler : MonoBehaviour
         doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
         _defParentPosition = itemsParent.transform.position;
 
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, clipVolume, false);
+        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
         audioSource.loop = true;
 
         CreateClient();
@@ -113,7 +116,7 @@ public class SellerHandler : MonoBehaviour
 
     private void ArrowClick()
     {
-        SoundManager.instance.PlayAudioClip(bipClip, transform, clipVolume);
+        SoundManager.instance.PlayAudioClip(peepClip, transform, peepClipVolume);
 
         StartCoroutine(Move());
         _curArrow = GetCurArrow();
@@ -140,7 +143,7 @@ public class SellerHandler : MonoBehaviour
             }
             else
             {
-                SoundManager.instance.PlayAudioClip(purchaseClip, transform, clipVolume);
+                SoundManager.instance.PlayAudioClip(purchaseClip, transform, purchaseClipVolume);
                 CreateClient();
             }
         }
@@ -148,7 +151,7 @@ public class SellerHandler : MonoBehaviour
 
     private IEnumerator Move()
     {
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(conveyerClip, transform, clipVolume, false);
+        //AudioSource audioSource = SoundManager.instance.PlayAudioClip(conveyerClip, transform, conveyerClipVolume, false);
         float newPos = itemsParent.transform.position.x - 1f;
         while (itemsParent.transform.position.x >= newPos)
         {
@@ -158,6 +161,6 @@ public class SellerHandler : MonoBehaviour
 
             yield return new WaitForSeconds(0.02f);
         }
-        audioSource.Stop();
+        //audioSource.Stop();
     }
 }

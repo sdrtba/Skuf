@@ -5,6 +5,18 @@ using UnityEngine.UI;
 
 public class ZavodHandler : MonoBehaviour
 {
+    /*[SerializeField] private AudioClip conveyerClip;
+    [Range(0f, 1f)][SerializeField] private float conveyerClipVolume;*/
+    [SerializeField] private AudioClip backClip;
+    [Range(0f, 1f)][SerializeField] private float backClipVolume;
+    [SerializeField] private AudioClip leverClip;
+    [Range(0f, 1f)][SerializeField] private float leverClipVolume;
+    [SerializeField] private AudioClip pressClip;
+    [Range(0f, 1f)][SerializeField] private float pressClipVolume;
+    [SerializeField] private AudioClip changeClip;
+    [Range(0f, 1f)][SerializeField] private float changeClipVolume;
+
+
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
     [SerializeField] private Text doneText;
@@ -33,6 +45,7 @@ public class ZavodHandler : MonoBehaviour
     [SerializeField] private Button nextBtn;
     [SerializeField] private Button prevBtn;
     [Range(0f, 100f)][SerializeField] private float itemsSpeed;
+    private bool _canPressBtn = true;
     private float offset = 0.1f;
     private bool _itemsMoveLeft = false;
     private bool _itemsMoveRight = false;
@@ -57,6 +70,9 @@ public class ZavodHandler : MonoBehaviour
         prevBtn.interactable = false;
         defY = press.position.y;
 
+        AudioSource windAudioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
+        windAudioSource.loop = true;
+
         int rand;
         for (int i = 0; i < prefabs.Length; i++)
         {
@@ -74,18 +90,35 @@ public class ZavodHandler : MonoBehaviour
         if (_itemsMoveRight)
         {
             itemsParent.transform.position = Vector3.Lerp(itemsParent.transform.position, imageItemsPoints[_id].position, itemsSpeed * Time.deltaTime);
-            if (itemsParent.transform.position.x + offset >= imageItemsPoints[_id].position.x) _itemsMoveRight = false;
+            if (itemsParent.transform.position.x + offset >= imageItemsPoints[_id].position.x)
+            {
+                _itemsMoveRight = false;
+                _canPressBtn = true;
+            }
         }
         else if (_itemsMoveLeft)
         {
             itemsParent.transform.position = Vector3.Lerp(itemsParent.transform.position, imageItemsPoints[_id].position, itemsSpeed * Time.deltaTime);
-            if (itemsParent.transform.position.x - offset <= imageItemsPoints[_id].position.x) _itemsMoveLeft = false;
+            if (itemsParent.transform.position.x - offset <= imageItemsPoints[_id].position.x)
+            { 
+                _itemsMoveLeft = false;
+                _canPressBtn = true;
+            }
         }
 
         if (slider.value < 1 && _sliderMoveRight) slider.value += sliderSpeed * Time.deltaTime;
         else _sliderMoveRight = false;
         if (slider.value > 0 && !_sliderMoveRight) slider.value -= sliderSpeed * Time.deltaTime;
         else _sliderMoveRight = true;
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Prev();
+        }
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Next();
+        }
     }
 
     private IEnumerator MoveLine()
@@ -100,6 +133,7 @@ public class ZavodHandler : MonoBehaviour
 
     private IEnumerator Press(bool success)
     {
+        AudioSource audioSource = SoundManager.instance.PlayAudioClip(pressClip, transform, pressClipVolume, false);
         _canPress = false;
         while (press.position.y > waitingTransform.position.y)
         {
@@ -114,6 +148,8 @@ public class ZavodHandler : MonoBehaviour
 
         index += 1;
         indexText.text = index + "/" + prefabs.Length;
+
+        audioSource.Stop();
 
         while (press.position.y < defY)
         {
@@ -137,6 +173,7 @@ public class ZavodHandler : MonoBehaviour
 
     public void LeverPressed()
     {
+        SoundManager.instance.PlayAudioClip(leverClip, transform, leverClipVolume);
         if (_canPress)
         {
             if (slider.value >= _random && slider.value <= _random + successRangeValue && _id == id[0])
@@ -165,22 +202,34 @@ public class ZavodHandler : MonoBehaviour
 
     public void Next()
     {
-        _itemsMoveLeft = true;
+        if (_canPressBtn)
+        {
+            _canPressBtn = false;
+            _itemsMoveLeft = true;
 
-        _id += 1;
-        CheckButton();
+            _id += 1;
+            CheckButton();
+
+        }
+        
     }
 
     public void Prev()
     {
-        _itemsMoveRight = true;
+        if (_canPressBtn)
+        {
+            _canPressBtn = false;
+            _itemsMoveRight = true;
 
-        _id -= 1;
-        CheckButton();
+            _id -= 1;
+            CheckButton();
+        }
+        
     }
 
     private void CheckButton()
     {
+        SoundManager.instance.PlayAudioClip(changeClip, transform, changeClipVolume);
         if (_id == 3) nextBtn.interactable = false;
         else if (_id == 0) prevBtn.interactable = false;
         else

@@ -780,9 +780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75228bc436a60714c80279421b8a90f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skuf: {fileID: 611966836}
-  clip: {fileID: 8300000, guid: 62925774842d8b54aaa0aaf52f73654c, type: 3}
-  clipVolume: 0.3
+  tvClip: {fileID: 8300000, guid: 62925774842d8b54aaa0aaf52f73654c, type: 3}
+  tvClipVolume: 0.5
   speed: 1
   hungerByScoreImpact: 2
 --- !u!1 &705489900
@@ -2184,8 +2183,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1803881022}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 637876699}
+        m_TargetAssemblyTypeName: TVHandler, Assembly-CSharp
         m_MethodName: ToggleActive
         m_Mode: 1
         m_Arguments:
@@ -2196,8 +2195,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 637876699}
-        m_TargetAssemblyTypeName: TVHandler, Assembly-CSharp
+      - m_Target: {fileID: 1803881022}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
         m_MethodName: ToggleActive
         m_Mode: 1
         m_Arguments:

@@ -2461,6 +2461,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26b02b47d214084c80d2992850ebee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backClip: {fileID: 8300000, guid: 5bf38ae085d587844bdbde91fc4868e7, type: 3}
+  backClipVolume: 0.1
+  leverClip: {fileID: 8300000, guid: 7dd0d1c30d33f6044b9c5891aada355a, type: 3}
+  leverClipVolume: 0.5
+  pressClip: {fileID: 8300000, guid: d1b8f84e70ddf2e438d4f9cbf94f6c07, type: 3}
+  pressClipVolume: 0.5
+  changeClip: {fileID: 8300000, guid: b1185a392d6898545942cb81e3e2d7e7, type: 3}
+  changeClipVolume: 0.5
   hungerCanvas: {fileID: 692441813}
   doneCanvas: {fileID: 917794456}
   doneText: {fileID: 1028407350}

@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class TVHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject skuf;
-    [SerializeField] private AudioClip clip;
-    [Range(0f, 1f)][SerializeField] private float clipVolume;
+    [SerializeField] private AudioClip tvClip;
+    [Range(0f, 1f)][SerializeField] private float tvClipVolume;
     [Range(0f, 100f)][SerializeField] private float speed;
     [Range(0, 100)][SerializeField] private int hungerByScoreImpact;
     private AudioSource audioSource;
@@ -16,7 +15,7 @@ public class TVHandler : MonoBehaviour
         SkufHandler.instance.SetHUDVisibility(true);
         _defSpeed = speed;
 
-        audioSource = SoundManager.instance.PlayAudioClip(clip, transform, clipVolume, false);
+        audioSource = SoundManager.instance.PlayAudioClip(tvClip, transform, tvClipVolume, false);
         audioSource.loop = true;
         audioSource.Stop();
     }

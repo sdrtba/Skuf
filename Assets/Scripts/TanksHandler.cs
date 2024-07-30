@@ -4,12 +4,18 @@ using UnityEngine.UI;
 public class TanksHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip enemyDeadClip;
-    [SerializeField] private AudioClip windClip;
-    [SerializeField] private AudioClip tanksClip;
-    [SerializeField] private AudioClip[] deadClip;
-    [SerializeField] private AudioClip[] shotClip;
-    [Range(0f, 1f)][SerializeField] private float clipVolume;
+    [Range(0f, 1f)][SerializeField] private float enemyDeadClipVolume;
+    [SerializeField] private AudioClip enemyShotClip;
+    [Range(0f, 1f)][SerializeField] private float enemyShotClipVolume;
 
+    [SerializeField] private AudioClip deadClip;
+    [Range(0f, 1f)][SerializeField] private float deadClipVolume;
+
+    [SerializeField] private AudioClip windClip;
+    [Range(0f, 1f)][SerializeField] private float windClipVolume;
+    [SerializeField] private AudioClip tanksClip;
+    [Range(0f, 1f)][SerializeField] private float tanksClipVolume;
+    private AudioSource _tanksAudioSource;
 
 
     [SerializeField] private Text loseText;
@@ -49,10 +55,10 @@ public class TanksHandler : MonoBehaviour
 
         _aimRb = aim.GetComponent<Rigidbody2D>();
 
-        AudioSource windAudioSource = SoundManager.instance.PlayAudioClip(tanksClip, transform, clipVolume, false);
+        AudioSource windAudioSource = SoundManager.instance.PlayAudioClip(tanksClip, transform, tanksClipVolume, false);
         windAudioSource.loop = true;
-        AudioSource tanksAudioSource = SoundManager.instance.PlayAudioClip(windClip, transform, clipVolume, false);
-        tanksAudioSource.loop = true;
+        _tanksAudioSource = SoundManager.instance.PlayAudioClip(windClip, transform, windClipVolume, false);
+        _tanksAudioSource.loop = true;
     }
 
     private void Update()
@@ -66,15 +72,17 @@ public class TanksHandler : MonoBehaviour
 
     public bool GetDamage()
     {
-        SoundManager.instance.PlayAudioClip(shotClip, transform, clipVolume);
+        SoundManager.instance.PlayAudioClip(enemyShotClip, transform, enemyShotClipVolume);
         hpSlider.value -= damage;
         if (hpSlider.value <= 0)
         {
             _active = false;
             loseCanvas.SetActive(true);
-            SoundManager.instance.PlayAudioClip(deadClip, transform, clipVolume);
+            SoundManager.instance.PlayAudioClip(deadClip, transform, deadClipVolume);
             SkufHandler.instance.ChangeHunger(-hungerImpact);
             SkufHandler.instance.ChangeScore(-loseScoreImpact);
+
+            _tanksAudioSource.Stop();
 
             return true;
         }
@@ -83,8 +91,7 @@ public class TanksHandler : MonoBehaviour
 
     public bool IncreaseScore()
     {
-        SoundManager.instance.PlayAudioClip(enemyDeadClip, transform, clipVolume);
-        SoundManager.instance.PlayAudioClip(deadClip, transform, clipVolume);
+        SoundManager.instance.PlayAudioClip(enemyDeadClip, transform, enemyDeadClipVolume);
         score += 1;
         scoreText.text = $"{score}/{winScore}";
         if (score >= winScore) {

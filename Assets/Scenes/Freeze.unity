@@ -575,14 +575,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openClip: {fileID: 8300000, guid: 549e697596fc3314c97b7606b30b8445, type: 3}
+  openClipVolume: 0.5
+  deniedClip: {fileID: 8300000, guid: beed0fbcb0357ea47a47905654f36d89, type: 3}
+  deniedClipVolume: 0.5
   eatClip: {fileID: 8300000, guid: 0d17e54c0fb56794a8a84c0ffe931948, type: 3}
+  eatClipVolume: 0.5
   drinkClip:
   - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
   - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
   - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
   - {fileID: 8300000, guid: 5720b5ef073433c49ab953b117bc674c, type: 3}
   - {fileID: 8300000, guid: bbcfca6245e84794c82201e30f5f4cfa, type: 3}
-  clipVolume: 1
+  drinkClipVolume: 0.5
   bear: {fileID: 270042845}
   food: {fileID: 779669811}
   bearText: {fileID: 719186847}

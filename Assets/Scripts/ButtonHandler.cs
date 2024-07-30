@@ -37,9 +37,7 @@ public class ButtonHandler : MonoBehaviour
         {
             if (_isActive)
             {
-                int index;
-                if (sprites.Length == 1) index = 0;
-                else index = Random.Range(0, sprites.Length);
+                int index = Random.Range(0, sprites.Length);
                 gameObject.GetComponent<Image>().sprite = sprites[index];
 
                 SpriteState _ss = new SpriteState();

@@ -4,9 +4,13 @@ using UnityEngine.UI;
 public class FreezeHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip openClip;
+    [Range(0f, 1f)][SerializeField] private float openClipVolume;
+    [SerializeField] private AudioClip deniedClip;
+    [Range(0f, 1f)][SerializeField] private float deniedClipVolume;
     [SerializeField] private AudioClip eatClip;
+    [Range(0f, 1f)][SerializeField] private float eatClipVolume;
     [SerializeField] private AudioClip[] drinkClip;
-    [Range(0f, 1f)][SerializeField] private float clipVolume;
+    [Range(0f, 1f)][SerializeField] private float drinkClipVolume;
 
     [SerializeField] private GameObject bear;
     [SerializeField] private GameObject food;
@@ -22,7 +26,7 @@ public class FreezeHandler : MonoBehaviour
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(true);
-        SoundManager.instance.PlayAudioClip(openClip, transform, clipVolume);
+        SoundManager.instance.PlayAudioClip(openClip, transform, openClipVolume);
         ChangeFreeze(); 
     }
 
@@ -40,13 +44,17 @@ public class FreezeHandler : MonoBehaviour
         {
             if (_drinkAudioSourceInstance == null)
             {
-                _drinkAudioSourceInstance = SoundManager.instance.PlayAudioClip(drinkClip, transform, clipVolume, false);
+                _drinkAudioSourceInstance = SoundManager.instance.PlayAudioClip(drinkClip, transform, drinkClipVolume, false);
                 Destroy(_drinkAudioSourceInstance, _drinkAudioSourceInstance.clip.length);
             }
 
             SkufHandler.instance.bearCount--;
             SkufHandler.instance.ChangeScore(bearImpact);
             ChangeFreeze();
+        }
+        else
+        {
+            SoundManager.instance.PlayAudioClip(deniedClip, transform, deniedClipVolume);
         }
     }
 
@@ -58,13 +66,17 @@ public class FreezeHandler : MonoBehaviour
 
             if (_eatAudioSourceInstance == null)
             {
-                _eatAudioSourceInstance = SoundManager.instance.PlayAudioClip(eatClip, transform, clipVolume, false);
+                _eatAudioSourceInstance = SoundManager.instance.PlayAudioClip(eatClip, transform, eatClipVolume, false);
                 Destroy(_eatAudioSourceInstance, _eatAudioSourceInstance.clip.length);
             }
 
             SkufHandler.instance.foodCount--;
             SkufHandler.instance.ChangeHunger(foodImpact);
             ChangeFreeze();
+        }
+        else
+        {
+            SoundManager.instance.PlayAudioClip(deniedClip, transform, deniedClipVolume);
         }
     }
 }
