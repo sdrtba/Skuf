@@ -1,90 +1,93 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DriveHandler : MonoBehaviour
 {
     [Header("Sound")]
-    [SerializeField] private AudioClip backClip;
-    [Range(0, 1)][SerializeField] private float backClipVolume;
+    [SerializeField] private AudioClip streetClip;
+    [Range(0, 1)][SerializeField] private float streetClipVolume;
     [SerializeField] private AudioClip driveClip;
     [Range(0, 1)][SerializeField] private float driveClipVolume;
 
     [Header("Coefficients")]
-    [Range(0, 100)][SerializeField] private int moneyImpact;
+    [Range(0, 100)][SerializeField] private int deliveryTime;
+    [Range(0, 100)][SerializeField] private float frequenz;
+    [Range(0, 100)][SerializeField] private float amplitude;
+    [Range(0, 100)][SerializeField] private float backGroundSpeed;
     [Range(0, 100)][SerializeField] private int hungerImpact;
+    [Range(0, 100)][SerializeField] private int moneyImpact;
 
     [Header("System")]
-    [SerializeField] private GameObject[] unactiveObjects;
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
-    [SerializeField] private GameObject backGround;
-    [SerializeField] private GameObject driver;
-    [SerializeField] private Text doneText;
     [SerializeField] private Slider slider;
+    [SerializeField] private Text doneText;
+    [Space]
+    [SerializeField] private RectTransform driver;
+    [SerializeField] private RectTransform backGround;
+    [SerializeField] private float backGroundEndX;
+    [SerializeField] private float backGroundStartX;
 
     private bool _isDrive = false;
-    private Animator _driveAnimator;
-    private Animation _backgroundAnimation;
-    private AudioSource _audioSource;
+    private AudioSource _driveAudioSource;
+    private float _defDriverY;
 
 
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(false);
         if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+        else {
+            SkufHandler.instance.SetText(doneText, hungerImpact.ToString(), moneyImpact.ToString());
 
-        _driveAnimator = driver.gameObject.GetComponent<Animator>();
-        _backgroundAnimation = backGround.GetComponent<Animation>();
+            _defDriverY = driver.anchoredPosition.y;
+            slider.maxValue = deliveryTime;
 
-        _audioSource = SoundManager.instance.PlayAudioClip(driveClip, transform, driveClipVolume, false);
-        _audioSource.loop = true;
-        _audioSource.Stop();
+            _driveAudioSource = SoundManager.instance.PlayAudioClip(driveClip, transform, driveClipVolume, false);
+            _driveAudioSource.loop = true;
+            _driveAudioSource.Stop();
 
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
-        audioSource.loop = true;
-    }
-
-    private void FixedUpdate()
-    {
-        if (_isDrive)
-        {
-            float state = _driveAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-            slider.value = state;
-            if (state >= 1)
-            {
-                _isDrive = false;
-
-                SkufHandler.instance.SetText(doneText, hungerImpact.ToString(), moneyImpact.ToString());
-
-                _driveAnimator.SetBool("isDrive", false);
-                _backgroundAnimation.Stop();
-                doneCanvas.SetActive(true);
-
-                Debug.Log(doneText.text);
-                doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
-                Debug.Log(doneText.text);
-
-                SkufHandler.instance.ChangeMoney(moneyImpact);
-                SkufHandler.instance.ChangeHunger(-hungerImpact);
-
-                _audioSource.Stop();
-            }
+            AudioSource streetAudioSource = SoundManager.instance.PlayAudioClip(streetClip, transform, streetClipVolume, false);
+            streetAudioSource.loop = true;
         }
     }
-
-    
 
     public void Drive()
     {
-        foreach (GameObject go in unactiveObjects)
-        {
-            go.SetActive(false);
-        }
         _isDrive = true;
+        _driveAudioSource.Play();
+        StartCoroutine(Move());
+        StartCoroutine(Timer());
+    }
 
-        _driveAnimator.SetBool("isDrive", true);
-        _backgroundAnimation.Play();
+    public IEnumerator Move()
+    {
+        while (_isDrive)
+        {
+            slider.value += Time.deltaTime;
 
-        _audioSource.Play();
+            driver.anchoredPosition = new Vector2(driver.anchoredPosition.x, Mathf.Sin(Time.time * frequenz) * amplitude + _defDriverY);
+
+            backGround.Translate(Vector2.left * backGroundSpeed * Time.deltaTime);
+            if (backGround.anchoredPosition.x <= backGroundEndX)
+            {
+                backGround.anchoredPosition = new Vector2(backGroundStartX, backGround.anchoredPosition.y);
+            }
+
+            yield return null;
+        }
+    }
+
+    public IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(deliveryTime);
+
+        _isDrive = false;
+        _driveAudioSource.Stop();
+        doneCanvas.SetActive(true);
+
+        SkufHandler.instance.ChangeMoney(moneyImpact);
+        SkufHandler.instance.ChangeHunger(-hungerImpact);
     }
 }

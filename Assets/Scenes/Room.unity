@@ -424,7 +424,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.31764707, g: 0.31764707, b: 0.31764707, a: 0}
+  m_BackGroundColor: {r: 0.49803925, g: 0.83921576, b: 0.9921569, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1776,7 +1776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9a21af3a9ec3f4e857f50a98643d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushUpForm: {fileID: 1692443529}
   buttons:
   - {fileID: 1803881019}
   - {fileID: 1149905882}
@@ -1784,6 +1783,7 @@ MonoBehaviour:
   - {fileID: 1362572207}
   sprites: []
   highlitedSprites: []
+  pushUpForm: {fileID: 1692443529}
   skuf: {fileID: 0}
 --- !u!1 &1358974681
 GameObject:
@@ -2062,7 +2062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9a21af3a9ec3f4e857f50a98643d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushUpForm: {fileID: 2041122546}
   buttons:
   - {fileID: 1803881019}
   - {fileID: 1149905882}
@@ -2072,6 +2071,7 @@ MonoBehaviour:
   - {fileID: 1709544176, guid: 146659dac93bcfa4db3cb27f88aea24d, type: 3}
   highlitedSprites:
   - {fileID: -204809844, guid: a53a7553d0938204a8a2e5c1751a6957, type: 3}
+  pushUpForm: {fileID: 2041122546}
   skuf: {fileID: 611966836}
 --- !u!1 &1692443529
 GameObject:
@@ -2267,7 +2267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9a21af3a9ec3f4e857f50a98643d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushUpForm: {fileID: 0}
   buttons:
   - {fileID: 1149905882}
   - {fileID: 2102618926}
@@ -2281,6 +2280,7 @@ MonoBehaviour:
   - {fileID: -278526795, guid: a53a7553d0938204a8a2e5c1751a6957, type: 3}
   - {fileID: 329452572, guid: a53a7553d0938204a8a2e5c1751a6957, type: 3}
   - {fileID: -644088339, guid: a53a7553d0938204a8a2e5c1751a6957, type: 3}
+  pushUpForm: {fileID: 0}
   skuf: {fileID: 611966836}
 --- !u!1 &1881634036
 GameObject:

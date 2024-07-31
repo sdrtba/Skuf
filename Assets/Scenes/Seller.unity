@@ -1104,7 +1104,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  m_BackGroundColor: {r: 0.49803925, g: 0.83921576, b: 0.9921569, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1335,8 +1335,9 @@ MonoBehaviour:
   purchaseClipVolume: 0.5
   backClip: {fileID: 8300000, guid: e0fbe1fff71c686449668d9c61838863, type: 3}
   backClipVolume: 0.1
-  line: {fileID: 2104925721}
-  itemsParent: {fileID: 1155289457}
+  winScore: 5
+  hungerImpact: 20
+  moneyImpact: 25
   curItems:
   - {fileID: 1984071832}
   - {fileID: 169971126}
@@ -1349,19 +1350,18 @@ MonoBehaviour:
   - {fileID: 153911960}
   - {fileID: 470456179}
   - {fileID: 81714672}
-  arrowObject: {fileID: 277025851}
   arrowSprites:
   - {fileID: 1126255425, guid: daccbf1cc3d2b134e9be4b7793b66449, type: 3}
   - {fileID: 1640996870, guid: daccbf1cc3d2b134e9be4b7793b66449, type: 3}
   - {fileID: -742902200, guid: daccbf1cc3d2b134e9be4b7793b66449, type: 3}
   - {fileID: -917025397, guid: daccbf1cc3d2b134e9be4b7793b66449, type: 3}
+  itemsParent: {fileID: 1155289457}
+  arrowObject: {fileID: 277025851}
   hungerCanvas: {fileID: 227338807}
   doneCanvas: {fileID: 1759023907}
+  line: {fileID: 2104925721}
   doneText: {fileID: 1753772639}
   scoreText: {fileID: 1617259803}
-  winScore: 5
-  hungerImpact: 20
-  moneyImpact: 25
 --- !u!1 &702275005
 GameObject:
   m_ObjectHideFlags: 0

@@ -439,7 +439,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.31764707, g: 0.31764707, b: 0.31764707, a: 0}
+  m_BackGroundColor: {r: 0.49803925, g: 0.83921576, b: 0.9921569, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2523,15 +2523,19 @@ MonoBehaviour:
   pressClipVolume: 0.5
   changeClip: {fileID: 8300000, guid: b1185a392d6898545942cb81e3e2d7e7, type: 3}
   changeClipVolume: 0.5
+  failImpact: 2
+  moneyImpact: 30
+  hungerImpact: 25
+  pressSpeed: 5
+  prefabsSpeed: 7
+  itemsSpeed: 7
+  sliderSpeed: 1
+  successRangeValue: 0.2
   hungerCanvas: {fileID: 692441813}
   doneCanvas: {fileID: 917794456}
   doneText: {fileID: 1028407350}
   indexText: {fileID: 1563593891}
-  failImpact: 2
-  moneyImpact: 30
-  hungerImpact: 25
   press: {fileID: 1160205127}
-  pressSpeed: 5
   objects:
   - {fileID: 2920584505116503254, guid: 2262d0d8da4744b469ad6264f326e969, type: 3}
   - {fileID: 5227850689216259034, guid: f45281db0ddeda347b21118823e4657b, type: 3}
@@ -2556,7 +2560,6 @@ MonoBehaviour:
   - {fileID: 98520085}
   prefabsParentTransform: {fileID: 1202699228}
   waitingTransform: {fileID: 87960426}
-  prefabsSpeed: 7
   itemsParent: {fileID: 688743808}
   imageItemsPoints:
   - {fileID: 1400030725}
@@ -2565,11 +2568,8 @@ MonoBehaviour:
   - {fileID: 1098123514}
   nextBtn: {fileID: 1704144086}
   prevBtn: {fileID: 1000537164}
-  itemsSpeed: 7
   slider: {fileID: 1896995515}
   successRange: {fileID: 1821433531}
-  sliderSpeed: 1
-  successRangeValue: 0.2
 --- !u!1 &1400030724
 GameObject:
   m_ObjectHideFlags: 0
