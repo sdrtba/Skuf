@@ -89,5 +89,7 @@ public class DriveHandler : MonoBehaviour
 
         SkufHandler.instance.ChangeMoney(moneyImpact);
         SkufHandler.instance.ChangeHunger(-hungerImpact);
+
+        YG.YandexGame.SaveProgress();
     }
 }

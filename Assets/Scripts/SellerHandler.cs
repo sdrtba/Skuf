@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,66 +17,104 @@ public class SellerHandler : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioClip peepClip;
     [Range(0, 1)][SerializeField] private float peepClipVolume;
-    [SerializeField] private AudioClip purchaseClip;
-    [Range(0, 1)][SerializeField] private float purchaseClipVolume;
+    [SerializeField] private AudioClip clientClip;
+    [Range(0, 1)][SerializeField] private float clientClipVolume;
     [SerializeField] private AudioClip backClip;
     [Range(0, 1)][SerializeField] private float backClipVolume;
 
     [Header("Coefficients")]
+    [Range(0, 100)][SerializeField] private float objectsParentSpeed;
+    [Range(0, 100)][SerializeField] private int stepsCount;
     [Range(0, 100)][SerializeField] private int winScore;
     [Range(0, 100)][SerializeField] private int hungerImpact;
     [Range(0, 100)][SerializeField] private int moneyImpact;
 
     [Header("System")]
-    [SerializeField] private GameObject[] curItems;
-    [SerializeField] private GameObject[] itemObjects;
-    [SerializeField] private Sprite[] arrowSprites;
-    [SerializeField] private GameObject itemsParent;
-    [SerializeField] private GameObject arrowObject;
     [SerializeField] private GameObject hungerCanvas;
     [SerializeField] private GameObject doneCanvas;
-    [SerializeField] private RectTransform line;
     [SerializeField] private Text doneText;
     [SerializeField] private Text scoreText;
+    [Space]
+    [SerializeField] private GameObject[] prefabs;
+    [SerializeField] private GameObject[] objects;
+    [SerializeField] private RectTransform objectsParent;
+    [SerializeField] private RectTransform endTransform;
+    [Space]
+    [SerializeField] private Sprite[] arrowSprites;
+    [SerializeField] private GameObject arrowObject;
+    [SerializeField] private RectTransform line;
 
-    private bool _isDone = false;
-    private int _itemsCount = 5;
+    private List<GameObject> _objectsList = new List<GameObject>(); 
+    private int _score = 0;
     private Vector3 _defParentPosition;
+    private Transform _arrowTransform;
+    private Image _arrowImage;
     private Arrow _curArrow;
-    private float _score;
+    private bool _canMove;
+    private int _curStep;
 
 
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(false);
         if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+        else
+        {
+            SkufHandler.instance.SetText(doneText, hungerImpact.ToString(), moneyImpact.ToString());
 
-        doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
-        _defParentPosition = itemsParent.transform.position;
+            _defParentPosition = objectsParent.transform.position;
+            _arrowImage = arrowObject.GetComponent<Image>();
+            _arrowTransform = arrowObject.GetComponent<Transform>();
 
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
-        audioSource.loop = true;
+            AudioSource backAudioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
+            backAudioSource.loop = true;
 
-        CreateClient();
+            GenerateObjects();
+        }
     }
 
     private void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && _curArrow == Arrow.Left)
+        if (_canMove)
         {
-            ArrowClick();
+            if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) && _curArrow == Arrow.Left)
+            {
+                CallMove();
+            }
+            else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && _curArrow == Arrow.Right)
+            {
+                CallMove();
+            }
+            else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _curArrow == Arrow.Up)
+            {
+                CallMove();
+            }
+            else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _curArrow == Arrow.Down)
+            {
+                CallMove();
+            }
         }
-        else if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) && _curArrow == Arrow.Right)
+    }
+
+    private void GenerateObjects()
+    {
+        _curStep = 0;
+        _canMove = true;
+        objectsParent.transform.position = _defParentPosition;
+        _curArrow = GetCurArrow();
+
+        if (_objectsList.Count != 0)
         {
-            ArrowClick();
+            _objectsList.ForEach(ob => { Destroy(ob); });
+            _objectsList.Clear();
         }
-        else if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && _curArrow == Arrow.Up)
+
+        int rand;
+        for (int i = 0; i < objects.Length; i++)
         {
-            ArrowClick();
-        }
-        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && _curArrow == Arrow.Down)
-        {
-            ArrowClick();
+            rand = Random.Range(0, prefabs.Length);
+            GameObject newObject = Instantiate(prefabs[rand], objects[i].transform);
+            _objectsList.Add(newObject);
         }
     }
 
@@ -85,86 +124,68 @@ public class SellerHandler : MonoBehaviour
         switch (r)
         {
             case 0:
-                arrowObject.GetComponent<Image>().sprite = arrowSprites[0];
-                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 90);
+                _arrowImage.sprite = arrowSprites[0];
+                _arrowTransform.rotation = Quaternion.Euler(0, 0, 90);
                 return Arrow.Left;
             case 1:
-                arrowObject.GetComponent<Image>().sprite = arrowSprites[1];
-                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, -90);
+                _arrowImage.sprite = arrowSprites[1];
+                _arrowTransform.rotation = Quaternion.Euler(0, 0, -90);
                 return Arrow.Right;
             case 2:
-                arrowObject.GetComponent<Image>().sprite = arrowSprites[2];
-                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 0);
+                _arrowImage.sprite = arrowSprites[2];
+                _arrowTransform.rotation = Quaternion.Euler(0, 0, 0);
                 return Arrow.Up;
             case 3:
-                arrowObject.GetComponent<Image>().sprite = arrowSprites[3];
-                arrowObject.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, 180);
+                _arrowImage.sprite = arrowSprites[3];
+                _arrowTransform.rotation = Quaternion.Euler(0, 0, 180);
                 return Arrow.Down;
         }
         return Arrow.None;
     }
 
-    private void CreateClient()
+    private void CallMove()
     {
-        _curArrow = GetCurArrow();
-        itemsParent.transform.position = _defParentPosition;
-        _isDone = false;
-
-        for (int i = 0; i < _itemsCount; i++)
-        {
-            int r = Random.Range(0, itemObjects.Length);
-            curItems[i].GetComponent<Image>().sprite = itemObjects[r].GetComponent<Image>().sprite;
-            curItems[i].GetComponent<RectTransform>().sizeDelta = itemObjects[r].GetComponent<RectTransform>().sizeDelta;
-        }
-    }
-
-    private void ArrowClick()
-    {
-        SoundManager.instance.PlayAudioClip(peepClip, transform, peepClipVolume);
-
-        StartCoroutine(Move());
+        _canMove = false;
+        _curStep += 1;
         _curArrow = GetCurArrow();
 
-        if (itemsParent.transform.position.x <= -15)
-        {
-            _isDone = true;
-            StopAllCoroutines();
-        }
-
-        if (_isDone)
+        if (_curStep == stepsCount + 1)
         {
             _score += 1;
             scoreText.text = $"{_score}/{winScore}";
+            SoundManager.instance.PlayAudioClip(clientClip, transform, clientClipVolume);
 
-            if (_score >= winScore)
+            if (_score == winScore)
             {
-                _curArrow = Arrow.None;
-
                 doneCanvas.SetActive(true);
 
                 SkufHandler.instance.ChangeHunger(-hungerImpact);
                 SkufHandler.instance.ChangeMoney(moneyImpact);
+
+                YG.YandexGame.SaveProgress();
             }
             else
             {
-                SoundManager.instance.PlayAudioClip(purchaseClip, transform, purchaseClipVolume);
-                CreateClient();
+                GenerateObjects();
             }
+        }
+        else
+        {
+            SoundManager.instance.PlayAudioClip(peepClip, transform, peepClipVolume);
+            float destination = (endTransform.position.x - _defParentPosition.x) / stepsCount * _curStep + _defParentPosition.x;
+            StartCoroutine(Move(destination));
         }
     }
 
-    private IEnumerator Move()
+    private IEnumerator Move(float destination)
     {
-        //AudioSource audioSource = SoundManager.instance.PlayAudioClip(conveyerClip, transform, conveyerClipVolume, false);
-        float newPos = itemsParent.transform.position.x - 1f;
-        while (itemsParent.transform.position.x >= newPos)
+        while (objectsParent.position.x > destination)
         {
-            itemsParent.transform.position -= new Vector3(0.1f, 0, 0);
-
-            line.sizeDelta += new Vector2(10f, 0);
-
-            yield return new WaitForSeconds(0.02f);
+            objectsParent.Translate(Vector2.left * objectsParentSpeed * Time.deltaTime);
+            line.sizeDelta += new Vector2(objectsParentSpeed/13, 0);
+            yield return null;
         }
-        //audioSource.Stop();
+
+        _canMove = true;
     }
 }
