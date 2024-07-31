@@ -441,16 +441,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c69280e876daa44694fda5f86b13237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bird: {fileID: 470540131}
-  regenTime: 10
-  hungerImpact: 25
-  scoreImpact: 10
   birdClip: {fileID: 8300000, guid: 71a8ada88d9ae684ba24ee2292d7fd94, type: 3}
   birdClipVolume: 0.5
   deadClip: {fileID: 8300000, guid: ed588fb47ce46644faa8a90058aab487, type: 3}
   deadClipVolume: 0.5
   streetClip: {fileID: 8300000, guid: bef6862e7f4dd3e4db8b6337629ae432, type: 3}
   streetClipVolume: 0.2
+  regenTime: 10
+  hungerImpact: 25
+  scoreImpact: 10
+  bird: {fileID: 470540131}
 --- !u!1 &940811565
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,20 +3,24 @@ using UnityEngine.UI;
 
 public class DriveHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private AudioClip backClip;
-    [Range(0f,1f)][SerializeField] private float backClipVolume;
+    [Range(0, 1)][SerializeField] private float backClipVolume;
     [SerializeField] private AudioClip driveClip;
-    [Range(0f,1f)][SerializeField] private float driveClipVolume;
+    [Range(0, 1)][SerializeField] private float driveClipVolume;
 
-    [SerializeField] private GameObject hungerCanvas;
-    [SerializeField] private GameObject doneCanvas;
-    [SerializeField] private Text doneText;
-    [SerializeField] private GameObject[] unactiveObjects;
-    [SerializeField] private GameObject backGround;
-    [SerializeField] private GameObject driver;
-    [SerializeField] private Slider slider;
+    [Header("Coefficients")]
     [Range(0, 100)][SerializeField] private int moneyImpact;
     [Range(0, 100)][SerializeField] private int hungerImpact;
+
+    [Header("System")]
+    [SerializeField] private GameObject[] unactiveObjects;
+    [SerializeField] private GameObject hungerCanvas;
+    [SerializeField] private GameObject doneCanvas;
+    [SerializeField] private GameObject backGround;
+    [SerializeField] private GameObject driver;
+    [SerializeField] private Text doneText;
+    [SerializeField] private Slider slider;
 
     private bool _isDrive = false;
     private Animator _driveAnimator;

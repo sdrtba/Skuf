@@ -13,33 +13,37 @@ public enum Arrow
 
 public class SellerHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private AudioClip peepClip;
-    [Range(0f, 1f)][SerializeField] private float peepClipVolume;
+    [Range(0, 1)][SerializeField] private float peepClipVolume;
     [SerializeField] private AudioClip purchaseClip;
-    [Range(0f, 1f)][SerializeField] private float purchaseClipVolume;
-/*    [SerializeField] private AudioClip conveyerClip;
-    [Range(0f, 1f)][SerializeField] private float conveyerClipVolume;*/
+    [Range(0, 1)][SerializeField] private float purchaseClipVolume;
     [SerializeField] private AudioClip backClip;
-    [Range(0f, 1f)][SerializeField] private float backClipVolume;
+    [Range(0, 1)][SerializeField] private float backClipVolume;
 
-    [SerializeField] private RectTransform line;
-    [SerializeField] private GameObject itemsParent;
-    [SerializeField] private GameObject[] curItems;
-    [SerializeField] private GameObject[] itemObjects;
-    [SerializeField] private GameObject arrowObject;
-    [SerializeField] private Sprite[] arrowSprites;
-    [SerializeField] private GameObject hungerCanvas;
-    [SerializeField] private GameObject doneCanvas;
-    [SerializeField] private Text doneText;
-    [SerializeField] private Text scoreText;
+    [Header("Coefficients")]
     [Range(0, 100)][SerializeField] private int winScore;
     [Range(0, 100)][SerializeField] private int hungerImpact;
     [Range(0, 100)][SerializeField] private int moneyImpact;
+
+    [Header("System")]
+    [SerializeField] private GameObject[] curItems;
+    [SerializeField] private GameObject[] itemObjects;
+    [SerializeField] private Sprite[] arrowSprites;
+    [SerializeField] private GameObject itemsParent;
+    [SerializeField] private GameObject arrowObject;
+    [SerializeField] private GameObject hungerCanvas;
+    [SerializeField] private GameObject doneCanvas;
+    [SerializeField] private RectTransform line;
+    [SerializeField] private Text doneText;
+    [SerializeField] private Text scoreText;
+
+    private bool _isDone = false;
+    private int _itemsCount = 5;
     private Vector3 _defParentPosition;
     private Arrow _curArrow;
     private float _score;
-    private int _itemsCount = 5;
-    private bool _isDone = false;
+
 
     private void Start()
     {

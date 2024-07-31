@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class ShopHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private AudioClip backClip;
-    [Range(0f, 1f)][SerializeField] private float backClipVolume;
+    [Range(0, 1)][SerializeField] private float backClipVolume;
     [SerializeField] private AudioClip openClip;
-    [Range(0f, 1f)][SerializeField] private float openClipVolume;
+    [Range(0, 1)][SerializeField] private float openClipVolume;
     [SerializeField] private AudioClip buyClip;
-    [Range(0f, 1f)][SerializeField] private float buyClipVolume;
+    [Range(0, 1)][SerializeField] private float buyClipVolume;
     [SerializeField] private AudioClip deniedClip;
-    [Range(0f, 1f)][SerializeField] private float deniedClipVolume;
+    [Range(0, 1)][SerializeField] private float deniedClipVolume;
 
+    [Header("Coefficients")]
     [Range(0, 100)][SerializeField] private int bearPrice;
     [Range(0, 100)][SerializeField] private int foodPrice;
 

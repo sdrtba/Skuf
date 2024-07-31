@@ -3,25 +3,30 @@ using UnityEngine.UI;
 
 public class FreezeHandler : MonoBehaviour
 {
-    [SerializeField] private AudioClip openClip;
-    [Range(0f, 1f)][SerializeField] private float openClipVolume;
-    [SerializeField] private AudioClip deniedClip;
-    [Range(0f, 1f)][SerializeField] private float deniedClipVolume;
-    [SerializeField] private AudioClip eatClip;
-    [Range(0f, 1f)][SerializeField] private float eatClipVolume;
+    [Header("Sound")]
     [SerializeField] private AudioClip[] drinkClip;
-    [Range(0f, 1f)][SerializeField] private float drinkClipVolume;
+    [Range(0, 1)][SerializeField] private float drinkClipVolume;
+    [SerializeField] private AudioClip eatClip;
+    [Range(0, 1)][SerializeField] private float eatClipVolume;
+    [SerializeField] private AudioClip openClip;
+    [Range(0, 1)][SerializeField] private float openClipVolume;
+    [SerializeField] private AudioClip deniedClip;
+    [Range(0, 1)][SerializeField] private float deniedClipVolume;
 
-    [SerializeField] private GameObject bear;
-    [SerializeField] private GameObject food;
-    [SerializeField] private Text bearText;
-    [SerializeField] private Text foodText;
+    [Header("Coefficients")]
     [Range(0, 100)][SerializeField] private int bearImpact;
     [Range(0, 100)][SerializeField] private int foodImpact;
     [Range(0, 100)][SerializeField] private int foodExtraImpact;
 
+    [Header("System")]
+    [SerializeField] private GameObject bear;
+    [SerializeField] private GameObject food;
+    [SerializeField] private Text bearText;
+    [SerializeField] private Text foodText;
+    
     private AudioSource _drinkAudioSourceInstance;
     private AudioSource _eatAudioSourceInstance;
+
 
     private void Start()
     {

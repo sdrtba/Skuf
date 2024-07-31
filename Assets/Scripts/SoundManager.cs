@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    [NonSerialized] public static SoundManager instance;
 
+    [Header("System")]
     [SerializeField] private AudioSource soundFXObject;
+
 
     private void Awake()
     {
@@ -37,7 +40,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource PlayAudioClip(AudioClip[] clip, Transform spawnTransform, float volume, bool destroy = true)
     {
-        int random = Random.Range(0, clip.Length);
+        int random = UnityEngine.Random.Range(0, clip.Length);
 
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
         audioSource.clip = clip[random];

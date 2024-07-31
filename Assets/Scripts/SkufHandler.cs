@@ -7,8 +7,13 @@ using YG;
 
 public class SkufHandler : MonoBehaviour
 {
-    public static SkufHandler instance;
+    [NonSerialized] public static SkufHandler instance;
 
+    [Header("Coefficients")]
+    [SerializeField] public int maxScore;
+    [SerializeField] public int maxHunger;
+
+    [Header("System")]
     [SerializeField] private Canvas HUDCanvas;
     [SerializeField] private Slider scoreSlider;
     [SerializeField] private Slider hungerSlider;
@@ -20,10 +25,8 @@ public class SkufHandler : MonoBehaviour
     [NonSerialized] public int bearCount;
     [NonSerialized] public int foodCount;
 
-    [NonSerialized] public int maxScore = 600;
-    [NonSerialized] public int maxHunger = 150;
-
     [NonSerialized] public bool isBirdActive = true;
+
 
     private void OnEnable()
     {

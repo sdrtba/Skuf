@@ -3,40 +3,42 @@ using UnityEngine.UI;
 
 public class TanksHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private AudioClip enemyDeadClip;
-    [Range(0f, 1f)][SerializeField] private float enemyDeadClipVolume;
+    [Range(0, 1)][SerializeField] private float enemyDeadClipVolume;
     [SerializeField] private AudioClip enemyShotClip;
-    [Range(0f, 1f)][SerializeField] private float enemyShotClipVolume;
-
+    [Range(0, 1)][SerializeField] private float enemyShotClipVolume;
     [SerializeField] private AudioClip deadClip;
-    [Range(0f, 1f)][SerializeField] private float deadClipVolume;
-
+    [Range(0, 1)][SerializeField] private float deadClipVolume;
     [SerializeField] private AudioClip windClip;
-    [Range(0f, 1f)][SerializeField] private float windClipVolume;
+    [Range(0, 1)][SerializeField] private float windClipVolume;
     [SerializeField] private AudioClip tanksClip;
-    [Range(0f, 1f)][SerializeField] private float tanksClipVolume;
-    private AudioSource _tanksAudioSource;
+    [Range(0, 1)][SerializeField] private float tanksClipVolume;
 
-
-    [SerializeField] private Text loseText;
-    [SerializeField] private Text winText;
-    [SerializeField] private GameObject loseCanvas;
-    [SerializeField] private GameObject winCanvas;
-    [SerializeField] private GameObject hungerCanvas;
-    [SerializeField] private GameObject aim;
-    [SerializeField] private Slider hpSlider;
-    [SerializeField] private Text scoreText;
-    [Range(0f, 100f)][SerializeField] private float damage;
-    [Range(0f, 1000f)][SerializeField] private float aimSpeed;
+    [Header("Coefficients")]
+    [Range(0, 1000)][SerializeField] private float aimSpeed;
+    [Range(0, 100)][SerializeField] private float damage;
     [Range(0, 100)][SerializeField] private int winScore;
     [Range(0, 100)][SerializeField] private int hungerImpact;
     [Range(0, 100)][SerializeField] private int scoreImpact;
     [Range(0, 100)][SerializeField] private int loseScoreImpact;
+
+    [Header("System")]
+    [SerializeField] private GameObject loseCanvas;
+    [SerializeField] private GameObject winCanvas;
+    [SerializeField] private GameObject hungerCanvas;
+    [SerializeField] private GameObject aim;
+    [SerializeField] private Text loseText;
+    [SerializeField] private Text winText;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Slider hpSlider;
+
+    private int score = 0;
+    private AudioSource _tanksAudioSource;
     private Rigidbody2D _aimRb;
     private float _horizontal;
     private float _vertical;
     private bool _active = true;
-    private int score = 0;
 
 
     private void Start()

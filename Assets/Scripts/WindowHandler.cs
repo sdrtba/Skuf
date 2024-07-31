@@ -4,17 +4,22 @@ using UnityEngine.UI;
 
 public class WindowHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private AudioClip birdClip;
-    [Range(0f, 1f)][SerializeField] private float birdClipVolume;
+    [Range(0, 1)][SerializeField] private float birdClipVolume;
     [SerializeField] private AudioClip deadClip;
-    [Range(0f, 1f)][SerializeField] private float deadClipVolume;
+    [Range(0, 1)][SerializeField] private float deadClipVolume;
     [SerializeField] private AudioClip streetClip;
-    [Range(0f, 1f)][SerializeField] private float streetClipVolume;
+    [Range(0, 1)][SerializeField] private float streetClipVolume;
 
-    [SerializeField] GameObject bird;
+    [Header("Coefficients")]
     [Range(0, 100)][SerializeField] private int regenTime;
     [Range(0, 100)][SerializeField] private int hungerImpact;
     [Range(0, 100)][SerializeField] private int scoreImpact;
+
+    [Header("System")]
+    [SerializeField] private GameObject bird;
+
     private bool _canSay = true;
     private AudioSource _birdAudioSource;
     private Image _image;

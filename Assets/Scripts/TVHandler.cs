@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class TVHandler : MonoBehaviour
 {
+    [Header("Sound")]
     [SerializeField] private AudioClip tvClip;
-    [Range(0f, 1f)][SerializeField] private float tvClipVolume;
+    [Range(0, 1)][SerializeField] private float tvClipVolume;
 
-    [Range(0f, 100f)][SerializeField] private float increaseTime;
+    [Header("Coefficients")]
+    [Range(0, 100)][SerializeField] private float increaseTime;
     [Range(0, 100)][SerializeField] private int hungerByScoreImpact;
-    private AudioSource _tvAudioSource;
+
     private bool _isActive = false;
+    private AudioSource _tvAudioSource;
     private float _defSpeed;
+
 
     private void Start()
     {

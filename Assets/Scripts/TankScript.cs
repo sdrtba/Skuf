@@ -3,25 +3,30 @@ using UnityEngine.UI;
 
 public class TankScript : MonoBehaviour
 {
+    [Header("Coefficients")]
+    [Range(0f, 100f)][SerializeField] private float speed;
+    [Range(0f, 100f)][SerializeField] private float cooldown;
+    [Range(0, 100)][SerializeField] private int maxDelay;
+
+    [Header("System")]
     [SerializeField] private TanksHandler tanksHandler;
     [SerializeField] private GameObject aim;
     [SerializeField] private GameObject shot;
     [SerializeField] private Transform newPos;
     [SerializeField] private Sprite deadSprite;
-    [Range(0f, 100f)][SerializeField] private float speed;
-    [Range(0f, 100f)][SerializeField] private float cooldown;
-    [Range(0, 100)][SerializeField] private int maxDelay;
-    private Sprite defaultSprite;
-    private Vector3 defaultPos;
-    private float offset = 0.4f;
-    private float _timer;
-    private bool _isUping = true;
+
+    public static bool _tankActive = true;
     private bool _isShooting = false;
     private bool _isDowing = false;
-    private float _time = 0;
     private bool _canShoot = false;
     private bool _isShoted = false;
-    public static bool _tankActive = true;
+    private bool _isUping = true;
+    private float offset = 0.4f;
+    private float _time = 0;
+    private Sprite defaultSprite;
+    private Vector3 defaultPos;
+    private float _timer;
+
 
     private void Start()
     {

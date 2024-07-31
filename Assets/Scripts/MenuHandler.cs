@@ -6,10 +6,12 @@ using YG;
 
 public class MenuHandler : MonoBehaviour
 {
+    [Header("System")]
+    [SerializeField] private GameObject rateBtn;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider soundFXSlider;
     [SerializeField] private Slider musicSlider;
-    [SerializeField] private GameObject rateBtn;
+
 
     private void Start()
     {
@@ -45,5 +47,11 @@ public class MenuHandler : MonoBehaviour
     public void Rate()
     {
         YandexGame.ReviewShow(true);
+    }
+
+    public void Delete()
+    {
+        YandexGame.ResetSaveProgress();
+        YandexGame.SaveProgress();
     }
 }

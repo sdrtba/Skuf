@@ -3,16 +3,17 @@ using UnityEngine.UI;
 
 public class ButtonHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject pushUpForm;
+    [Header("System")]
     [SerializeField] private Button[] buttons;
-
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private Sprite[] highlitedSprites;
+    [SerializeField] private GameObject pushUpForm;
     [SerializeField] private GameObject skuf;
+
+    private bool _isActive = false;
     private SpriteState _defSS;
     private Sprite _defSprite;
 
-    private bool _isActive = false;
 
     private void Start()
     {
