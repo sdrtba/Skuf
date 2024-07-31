@@ -16,8 +16,11 @@ public class ButtonHandler : MonoBehaviour
 
     private void Start()
     {
-        _defSprite = GetComponent<Image>().sprite;
-        _defSS = GetComponent<Button>().spriteState;
+        if (sprites?.Length > 0)
+        {
+            _defSprite = GetComponent<Image>().sprite;
+            _defSS = GetComponent<Button>().spriteState;
+        }
     }
 
     public void ToggleActive()

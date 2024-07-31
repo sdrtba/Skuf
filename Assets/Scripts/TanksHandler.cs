@@ -48,10 +48,7 @@ public class TanksHandler : MonoBehaviour
             TankScript._tankActive = false;
             hungerCanvas.SetActive(true);
         }
-
-
-        loseText.text = loseText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", loseScoreImpact.ToString());
-        winText.text = winText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", scoreImpact.ToString());
+        
 
         _aimRb = aim.GetComponent<Rigidbody2D>();
 
@@ -77,6 +74,9 @@ public class TanksHandler : MonoBehaviour
         if (hpSlider.value <= 0)
         {
             _active = false;
+
+            loseText.text = loseText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", loseScoreImpact.ToString());
+
             loseCanvas.SetActive(true);
             SoundManager.instance.PlayAudioClip(deadClip, transform, deadClipVolume);
             SkufHandler.instance.ChangeHunger(-hungerImpact);
@@ -96,6 +96,9 @@ public class TanksHandler : MonoBehaviour
         scoreText.text = $"{score}/{winScore}";
         if (score >= winScore) {
             _active = false;
+
+            winText.text = winText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", scoreImpact.ToString());
+
             winCanvas.SetActive(true);
             SkufHandler.instance.ChangeHunger(-hungerImpact);
             SkufHandler.instance.ChangeScore(scoreImpact);

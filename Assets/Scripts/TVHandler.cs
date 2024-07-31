@@ -4,20 +4,21 @@ public class TVHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip tvClip;
     [Range(0f, 1f)][SerializeField] private float tvClipVolume;
-    [Range(0f, 100f)][SerializeField] private float speed;
+
+    [Range(0f, 100f)][SerializeField] private float increaseTime;
     [Range(0, 100)][SerializeField] private int hungerByScoreImpact;
-    private AudioSource audioSource;
+    private AudioSource _tvAudioSource;
     private bool _isActive = false;
     private float _defSpeed;
 
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(true);
-        _defSpeed = speed;
+        _defSpeed = increaseTime;
 
-        audioSource = SoundManager.instance.PlayAudioClip(tvClip, transform, tvClipVolume, false);
-        audioSource.loop = true;
-        audioSource.Stop();
+        _tvAudioSource = SoundManager.instance.PlayAudioClip(tvClip, transform, tvClipVolume, false);
+        _tvAudioSource.loop = true;
+        _tvAudioSource.Stop();
     }
 
     public void ToggleActive()
@@ -25,11 +26,11 @@ public class TVHandler : MonoBehaviour
         _isActive = !_isActive;
         if (_isActive )
         {
-            audioSource.Play();
+            _tvAudioSource.Play();
         }
         else
         {
-            audioSource.Stop();
+            _tvAudioSource.Stop();
         }
     }
 
@@ -37,12 +38,13 @@ public class TVHandler : MonoBehaviour
     {
         if (_isActive && SkufHandler.instance.hunger >= SkufHandler.instance.maxHunger*0.66)
         {
-            speed -= Time.deltaTime;
-            if (speed < 0)
+            increaseTime -= Time.deltaTime;
+            if (increaseTime < 0)
             {
                 SkufHandler.instance.ChangeHunger(-hungerByScoreImpact);
                 SkufHandler.instance.ChangeScore(1);
-                speed = _defSpeed;
+                increaseTime = _defSpeed;
+                YG.YandexGame.SaveProgress();
             }
         }
     }

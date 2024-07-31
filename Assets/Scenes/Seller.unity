@@ -382,8 +382,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -791,8 +791,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1333,8 +1333,6 @@ MonoBehaviour:
   peepClipVolume: 0.5
   purchaseClip: {fileID: 8300000, guid: 47b20788593dd614bb838c34ff6b6c75, type: 3}
   purchaseClipVolume: 0.5
-  conveyerClip: {fileID: 8300000, guid: 42f7e13eeddbd8b4e8625ee2d60171fc, type: 3}
-  conveyerClipVolume: 0.4
   backClip: {fileID: 8300000, guid: e0fbe1fff71c686449668d9c61838863, type: 3}
   backClipVolume: 0.1
   line: {fileID: 2104925721}
@@ -1507,6 +1505,7 @@ GameObject:
   - component: {fileID: 1140838915}
   - component: {fileID: 1140838917}
   - component: {fileID: 1140838916}
+  - component: {fileID: 1140838918}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -1576,6 +1575,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140838914}
   m_CullTransparentMesh: 1
+--- !u!114 &1140838918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140838914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMPComponent: {fileID: 0}
+  uniqueFontTMP: {fileID: 0}
+  textLComponent: {fileID: 1140838916}
+  infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
+  text: 
+  ru: "\u0412\u044B \u0441\u043B\u0438\u0448\u043A\u043E\u043C \u0433\u043E\u043B\u043E\u0434\u043D\u044B
+    \u0438 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C"
+  en: You're too hungry to work
+  tr: "\xC7al\u0131\u015Fmak i\xE7in \xE7ok a\xE7s\u0131n"
+  az: 
+  be: 
+  he: 
+  hy: 
+  ka: 
+  et: 
+  fr: 
+  kk: 
+  ky: 
+  lt: 
+  lv: 
+  ro: 
+  tg: 
+  tk: 
+  uk: 
+  uz: 
+  es: 
+  pt: 
+  ar: 
+  id: 
+  ja: 
+  it: 
+  de: 
+  hi: 
+  changeOnlyFont: 0
+  fontNumber: 0
+  uniqueFont: {fileID: 0}
+  additionalText: {fileID: 0}
+  textHeight: 20
+  processTranslateLabel: 3/3 completed
+  componentTextField: 1
+  countLang: 3
 --- !u!1 &1155289457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2061,8 +2113,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

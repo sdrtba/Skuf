@@ -4,18 +4,19 @@ using UnityEngine.UI;
 
 public class WindowHandler : MonoBehaviour
 {
-    [SerializeField] GameObject bird;
-    [Range(0, 100)][SerializeField] private int regenTime;
-    [Range(0, 100)][SerializeField] private int hungerImpact;
-    [Range(0, 100)][SerializeField] private int scoreImpact;
     [SerializeField] private AudioClip birdClip;
     [Range(0f, 1f)][SerializeField] private float birdClipVolume;
     [SerializeField] private AudioClip deadClip;
     [Range(0f, 1f)][SerializeField] private float deadClipVolume;
     [SerializeField] private AudioClip streetClip;
     [Range(0f, 1f)][SerializeField] private float streetClipVolume;
+
+    [SerializeField] GameObject bird;
+    [Range(0, 100)][SerializeField] private int regenTime;
+    [Range(0, 100)][SerializeField] private int hungerImpact;
+    [Range(0, 100)][SerializeField] private int scoreImpact;
     private bool _canSay = true;
-    private AudioSource _audioSource;
+    private AudioSource _birdAudioSource;
     private Image _image;
     private Button _button;
 
@@ -34,15 +35,15 @@ public class WindowHandler : MonoBehaviour
         SkufHandler.instance.SetHUDVisibility(true);
         if (SkufHandler.instance.hunger > 0) bird.GetComponent<Button>().interactable = false;
 
-        _audioSource = SoundManager.instance.PlayAudioClip(birdClip, transform, birdClipVolume, false);
+        _birdAudioSource = SoundManager.instance.PlayAudioClip(birdClip, transform, birdClipVolume, false);
 
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(streetClip, transform, streetClipVolume, false);
-        audioSource.loop = true;
+        AudioSource streetAudioSource = SoundManager.instance.PlayAudioClip(streetClip, transform, streetClipVolume, false);
+        streetAudioSource.loop = true;
     }
 
     private void Update()
     {
-        if (_canSay && _image.enabled == true)
+        if (_canSay && _image.enabled)
         {
             StartCoroutine(Say());
         }
@@ -54,7 +55,7 @@ public class WindowHandler : MonoBehaviour
         bird.GetComponent<Image>().enabled = false;
         bird.GetComponent<Button>().enabled = false;
 
-        _audioSource.Stop();
+        _birdAudioSource.Stop();
         SoundManager.instance.PlayAudioClip(deadClip, transform, deadClipVolume);
 
         SkufHandler.instance.ChangeHunger(hungerImpact);
@@ -66,8 +67,8 @@ public class WindowHandler : MonoBehaviour
     {
         _canSay = false;
         int rand = Random.Range(1, 5);
-        _audioSource.Play();
-        yield return new WaitForSeconds(rand + _audioSource.clip.length);
+        _birdAudioSource.Play();
+        yield return new WaitForSeconds(rand + _birdAudioSource.clip.length);
         _canSay = true;
     }
 }

@@ -33,14 +33,15 @@ public class FreezeHandler : MonoBehaviour
     private void ChangeFreeze()
     {
         if (SkufHandler.instance.bearCount == 0) bear.SetActive(false);
+        else bearText.text = "x" + SkufHandler.instance.bearCount;
+
         if (SkufHandler.instance.foodCount == 0) food.SetActive(false);
-        bearText.text = "x" + SkufHandler.instance.bearCount;
-        foodText.text = "x" + SkufHandler.instance.foodCount;
+        else foodText.text = "x" + SkufHandler.instance.foodCount;
     }
 
     public void TakeBear()
     {
-        if (SkufHandler.instance.score != SkufHandler.instance.maxScore)
+        if (SkufHandler.instance.score < SkufHandler.instance.maxScore)
         {
             if (_drinkAudioSourceInstance == null)
             {
@@ -60,7 +61,7 @@ public class FreezeHandler : MonoBehaviour
 
     public void TakeFood()
     {
-        if (SkufHandler.instance.hunger != SkufHandler.instance.maxHunger)
+        if (SkufHandler.instance.hunger < SkufHandler.instance.maxHunger)
         {
             if (SkufHandler.instance.hunger > SkufHandler.instance.maxHunger * 0.66) SkufHandler.instance.ChangeScore(foodExtraImpact);
 

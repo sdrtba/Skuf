@@ -19,8 +19,8 @@ public class ShopHandler : MonoBehaviour
         SkufHandler.instance.SetHUDVisibility(true);
         SoundManager.instance.PlayAudioClip(openClip, transform, openClipVolume);
 
-        AudioSource audioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
-        audioSource.loop = true;
+        AudioSource backAudioSource = SoundManager.instance.PlayAudioClip(backClip, transform, backClipVolume, false);
+        backAudioSource.loop = true;
     }
 
     public void BuyBear()

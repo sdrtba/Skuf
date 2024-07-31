@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ZavodHandler : MonoBehaviour
 {
-    /*[SerializeField] private AudioClip conveyerClip;
-    [Range(0f, 1f)][SerializeField] private float conveyerClipVolume;*/
     [SerializeField] private AudioClip backClip;
     [Range(0f, 1f)][SerializeField] private float backClipVolume;
     [SerializeField] private AudioClip leverClip;

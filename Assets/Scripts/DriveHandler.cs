@@ -29,7 +29,6 @@ public class DriveHandler : MonoBehaviour
         SkufHandler.instance.SetHUDVisibility(false);
         if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
 
-        doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
         _driveAnimator = driver.gameObject.GetComponent<Animator>();
         _backgroundAnimation = backGround.GetComponent<Animation>();
 
@@ -51,9 +50,15 @@ public class DriveHandler : MonoBehaviour
             {
                 _isDrive = false;
 
+                SkufHandler.instance.SetText(doneText, hungerImpact.ToString(), moneyImpact.ToString());
+
                 _driveAnimator.SetBool("isDrive", false);
                 _backgroundAnimation.Stop();
                 doneCanvas.SetActive(true);
+
+                Debug.Log(doneText.text);
+                doneText.text = doneText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", moneyImpact.ToString());
+                Debug.Log(doneText.text);
 
                 SkufHandler.instance.ChangeMoney(moneyImpact);
                 SkufHandler.instance.ChangeHunger(-hungerImpact);
@@ -62,6 +67,8 @@ public class DriveHandler : MonoBehaviour
             }
         }
     }
+
+    
 
     public void Drive()
     {

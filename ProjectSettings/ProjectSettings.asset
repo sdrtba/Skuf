@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
   m_StereoRenderingPath: 0
-  m_ActiveColorSpace: 1
+  m_ActiveColorSpace: 0
   unsupportedMSAAFallback: 0
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
@@ -327,7 +327,28 @@ PlayerSettings:
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
-  m_TemplateCustomTags: {}
+  m_TemplateCustomTags:
+    CHOOSE_LOADING_TYPE: 2
+    CONFIGURE_SHADOWS_AROUND_CANVAS: 
+    CONNECT_PLUGIN: YG1.6.2
+    CUSTOMIZE_BARS_BACKGROUND: backgroundColor = "#449ef3"
+    CUSTOMIZE_LOADING_SCREEN_BACKGROUND: 
+    CUSTOMIZE_LOGO: 
+    CUSTOM_EVENT_IN_CSS: 
+    CUSTOM_EVENT_IN_HTML: 
+    CUSTOM_EVENT_IN_JS: 
+    DISABLE_CONSOLE_MESSAGES: 
+    GP_GAMEREADY_AUTOCALL_DELAY: 
+    GP_PROJECT_ID: 
+    GP_SHOW_PRELOADER_AD: 
+    GP_TOKEN: 
+    IGB_GAME_DISTRIBUTION_GAME_ID: 
+    IGB_VK_PLAY_GAME_ID: 
+    LOCK_ASPECT_RATIO: all
+    YG_BANNER_DYNAMIC_1: 
+    YG_BANNER_DYNAMIC_2: 
+    YG_BANNER_STATIC_1: 
+    YG_BANNER_STATIC_2: 
   mobileMTRendering:
     Android: 1
     iPhone: 1
@@ -584,7 +605,7 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: PROJECT:PluginYG
+  webGLTemplate: PROJECT:AT2.1.2
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 0
@@ -601,7 +622,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Standalone: YG_PLUGIN_YANDEX_GAME;YG_NEWTONSOFT_FOR_AUTOLOCALIZATION;YG_NEWTONSOFT_FOR_SAVES;YG_TEXT_MESH_PRO
-    WebGL: YG_PLUGIN_YANDEX_GAME
+    WebGL: YG_PLUGIN_YANDEX_GAME;YG_NEWTONSOFT_FOR_AUTOLOCALIZATION;YG_NEWTONSOFT_FOR_SAVES;YG_TEXT_MESH_PRO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -617,7 +638,7 @@ PlayerSettings:
     QNX: 1
     Stadia: 1
     VisionOS: 1
-    WebGL: 1
+    WebGL: 4
     Windows Store Apps: 1
     XboxOne: 1
     iPhone: 1
