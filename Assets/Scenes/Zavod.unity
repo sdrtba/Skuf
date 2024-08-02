@@ -1859,8 +1859,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
+    m_Mode: 0
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1951,6 +1951,7 @@ GameObject:
   - component: {fileID: 1028407349}
   - component: {fileID: 1028407351}
   - component: {fileID: 1028407350}
+  - component: {fileID: 1028407352}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -2020,6 +2021,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028407348}
   m_CullTransparentMesh: 1
+--- !u!114 &1028407352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028407348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMPComponent: {fileID: 0}
+  uniqueFontTMP: {fileID: 0}
+  textLComponent: {fileID: 1028407350}
+  infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
+  text: 
+  ru: "\u0421\u043C\u0435\u043D\u0430 \u043E\u043A\u043E\u043D\u0447\u0435\u043D\u0430\n\u0413\u043E\u043B\u043E\u0434:
+    -{0}\n\u0414\u0435\u043D\u044C\u0433\u0438: +{1}"
+  en: 'Shift over
+
+    Hunger: -{0}
+
+    Money: +{1}'
+  tr: "A\xE7l\u0131\u011Fa\nGe\xE7i\u015F: -{0}\nPara: +{1}"
+  az: 
+  be: 
+  he: 
+  hy: 
+  ka: 
+  et: 
+  fr: 
+  kk: 
+  ky: 
+  lt: 
+  lv: 
+  ro: 
+  tg: 
+  tk: 
+  uk: 
+  uz: 
+  es: 
+  pt: 
+  ar: 
+  id: 
+  ja: 
+  it: 
+  de: 
+  hi: 
+  changeOnlyFont: 0
+  fontNumber: 0
+  uniqueFont: {fileID: 0}
+  additionalText: {fileID: 0}
+  textHeight: 54
+  processTranslateLabel: 3/3 completed
+  componentTextField: 1
+  countLang: 3
 --- !u!1 &1068865258
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,7 +2444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202699228}
   m_Layer: 5
-  m_Name: Prefabs Parent
+  m_Name: Objects Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2521,55 +2579,56 @@ MonoBehaviour:
   leverClipVolume: 0.5
   pressClip: {fileID: 8300000, guid: d1b8f84e70ddf2e438d4f9cbf94f6c07, type: 3}
   pressClipVolume: 0.5
-  changeClip: {fileID: 8300000, guid: b1185a392d6898545942cb81e3e2d7e7, type: 3}
-  changeClipVolume: 0.5
-  failImpact: 2
-  moneyImpact: 30
-  hungerImpact: 25
+  screenClip: {fileID: 8300000, guid: b1185a392d6898545942cb81e3e2d7e7, type: 3}
+  screenClipVolume: 0.5
+  hungerImpact: 20
+  moneyImpact: 25
+  failImpact: 4
+  screenItemsSpeed: 30
+  objectsSpeed: 10
   pressSpeed: 5
-  prefabsSpeed: 7
-  itemsSpeed: 7
-  sliderSpeed: 1
+  sliderSpeed: 2
   successRangeValue: 0.2
   hungerCanvas: {fileID: 692441813}
   doneCanvas: {fileID: 917794456}
   doneText: {fileID: 1028407350}
-  indexText: {fileID: 1563593891}
-  press: {fileID: 1160205127}
-  objects:
+  scoreText: {fileID: 1563593891}
+  nextBtn: {fileID: 1704144086}
+  prevBtn: {fileID: 1000537164}
+  leverBtn: {fileID: 1014884712}
+  items:
   - {fileID: 2920584505116503254, guid: 2262d0d8da4744b469ad6264f326e969, type: 3}
   - {fileID: 5227850689216259034, guid: f45281db0ddeda347b21118823e4657b, type: 3}
   - {fileID: 7769660512328981014, guid: e1babb1424d59aa41bd77c79b9a3ecef, type: 3}
   - {fileID: 7474570690175383806, guid: e117105db98997e4ebf4a10a79b56910, type: 3}
   - {fileID: 8420232470247218126, guid: 81bc2ac00bb833c4c904a069caf8b775, type: 3}
-  items:
+  prefabs:
   - {fileID: 5992611983348288131, guid: afec6aa1f42c7cb418b2e3929caa3dd9, type: 3}
   - {fileID: 6328660521016261299, guid: a3bc7cba8aab08b44bcf60c86da82336, type: 3}
   - {fileID: 3903154923604411613, guid: 614711e79b510434b98d58bc6f9950bf, type: 3}
   - {fileID: 3701467546994591238, guid: e38592d5341eeb1418311c3126edd5bf, type: 3}
-  prefabs:
-  - {fileID: 1120494319}
-  - {fileID: 1587687054}
-  - {fileID: 812525788}
-  - {fileID: 595589279}
-  - {fileID: 615974933}
-  - {fileID: 1081465581}
-  - {fileID: 1068865258}
-  - {fileID: 324174759}
-  - {fileID: 1439054874}
-  - {fileID: 98520085}
-  prefabsParentTransform: {fileID: 1202699228}
-  waitingTransform: {fileID: 87960426}
-  itemsParent: {fileID: 688743808}
-  imageItemsPoints:
+  objects:
+  - {fileID: 1120494320}
+  - {fileID: 1587687055}
+  - {fileID: 812525789}
+  - {fileID: 595589280}
+  - {fileID: 615974934}
+  - {fileID: 1081465582}
+  - {fileID: 1068865259}
+  - {fileID: 324174760}
+  - {fileID: 1439054875}
+  - {fileID: 98520086}
+  screenItemsPosition:
   - {fileID: 1400030725}
   - {fileID: 294748372}
   - {fileID: 1838738482}
   - {fileID: 1098123514}
-  nextBtn: {fileID: 1704144086}
-  prevBtn: {fileID: 1000537164}
-  slider: {fileID: 1896995515}
+  screenItemsParent: {fileID: 688743811}
+  objectsParent: {fileID: 1202699228}
+  waitingTransform: {fileID: 87960426}
+  press: {fileID: 1160205127}
   successRange: {fileID: 1821433531}
+  slider: {fileID: 1896995515}
 --- !u!1 &1400030724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,7 +3742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
