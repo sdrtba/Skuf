@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5227850689216259034
+--- !u!1 &8420232470247218126
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 502504447807080864}
-  - component: {fileID: 2684636438185628444}
-  - component: {fileID: 3288593427397207825}
+  - component: {fileID: 9189016969137371396}
+  - component: {fileID: 6477776048324860903}
+  - component: {fileID: 1597613552265492183}
   m_Layer: 5
-  m_Name: Object1
+  m_Name: Figure4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &502504447807080864
+--- !u!224 &9189016969137371396
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5227850689216259034}
+  m_GameObject: {fileID: 8420232470247218126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,23 +35,23 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 166, y: 155}
+  m_SizeDelta: {x: 150, y: 140}
   m_Pivot: {x: 0.5, y: 0}
---- !u!222 &2684636438185628444
+--- !u!222 &6477776048324860903
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5227850689216259034}
+  m_GameObject: {fileID: 8420232470247218126}
   m_CullTransparentMesh: 1
---- !u!114 &3288593427397207825
+--- !u!114 &1597613552265492183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5227850689216259034}
+  m_GameObject: {fileID: 8420232470247218126}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -713422744, guid: 85b6e48d877e3214d81e0fdf7e6082fb, type: 3}
+  m_Sprite: {fileID: -529996584, guid: 85b6e48d877e3214d81e0fdf7e6082fb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
