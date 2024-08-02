@@ -24,7 +24,7 @@ MonoBehaviour:
     photo: https://justplaygames.ru/public/icon_player.png
     payingStatus: paying
     serverTime: 1721201231000
-  AdWhenLoadingScene: 1
+  AdWhenLoadingScene: 0
   showFirstAd: 1
   rewardedAfterClosing: 1
   adDisplayCalls: 0

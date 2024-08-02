@@ -193,8 +193,6 @@ public class ZavodHandler : MonoBehaviour
 
     private void CheckButton()
     {
-        SoundManager.instance.PlayAudioClip(screenClip, transform, screenClipVolume);
-
         if (_curId == 3) nextBtn.interactable = false;
         else if (_curId == 0) prevBtn.interactable = false;
         else
@@ -230,6 +228,7 @@ public class ZavodHandler : MonoBehaviour
 
     public void Next()
     {
+        SoundManager.instance.PlayAudioClip(screenClip, transform, screenClipVolume);
         if (_canPressScreenBtn)
         {
             _curId += 1;
@@ -242,6 +241,7 @@ public class ZavodHandler : MonoBehaviour
 
     public void Prev()
     {
+        SoundManager.instance.PlayAudioClip(screenClip, transform, screenClipVolume);
         if (_canPressScreenBtn)
         {
             _curId -= 1;
