@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class TanksHandler : MonoBehaviour
 {
@@ -16,8 +18,9 @@ public class TanksHandler : MonoBehaviour
     [Range(0, 1)][SerializeField] private float tanksClipVolume;
 
     [Header("Coefficients")]
-    [Range(0, 1000)][SerializeField] private float aimSpeed;
-    [Range(0, 100)][SerializeField] private float damage;
+    [Range(0, 5)][SerializeField] public int maxTankPerTime;
+    [Range(0, 100)][SerializeField] private float aimSpeed;
+    [Range(0, 1)][SerializeField] private float damage;
     [Range(0, 100)][SerializeField] private int winScore;
     [Range(0, 100)][SerializeField] private int hungerImpact;
     [Range(0, 100)][SerializeField] private int scoreImpact;
@@ -33,40 +36,39 @@ public class TanksHandler : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private Slider hpSlider;
 
+    [NonSerialized] public int tanksCount = 0;
+    private bool _isActive = true;
     private int score = 0;
     private AudioSource _tanksAudioSource;
     private Rigidbody2D _aimRb;
     private float _horizontal;
     private float _vertical;
-    private bool _active = true;
 
 
     private void Start()
     {
         SkufHandler.instance.SetHUDVisibility(false);
 
-        if (SkufHandler.instance.hunger <= 0)
+        if (SkufHandler.instance.hunger <= 0) hungerCanvas.SetActive(true);
+        else
         {
-            TankScript._tankActive = false;
-            hungerCanvas.SetActive(true);
+            _aimRb = aim.GetComponent<Rigidbody2D>();
+
+            AudioSource windAudioSource = SoundManager.instance.PlayAudioClip(windClip, transform, windClipVolume, false);
+            windAudioSource.loop = true;
+
+            _tanksAudioSource = SoundManager.instance.PlayAudioClip(tanksClip, transform, tanksClipVolume, false);
+            _tanksAudioSource.loop = true;
         }
-        
-
-        _aimRb = aim.GetComponent<Rigidbody2D>();
-
-        AudioSource windAudioSource = SoundManager.instance.PlayAudioClip(tanksClip, transform, tanksClipVolume, false);
-        windAudioSource.loop = true;
-        _tanksAudioSource = SoundManager.instance.PlayAudioClip(windClip, transform, windClipVolume, false);
-        _tanksAudioSource.loop = true;
     }
 
     private void Update()
     {
-        _horizontal = Input.GetAxisRaw("Horizontal");
-        _vertical = Input.GetAxisRaw("Vertical");
+        _horizontal = Input.GetAxisRaw("Horizontal") * 100;
+        _vertical = Input.GetAxisRaw("Vertical") * 100;
 
-        if (_active)
-            _aimRb.AddForce(new Vector3(_horizontal * aimSpeed * Time.deltaTime, _vertical * aimSpeed * Time.deltaTime, 0));
+        if (_isActive)
+            _aimRb.AddForce(new Vector3(_horizontal, _vertical, 0).normalized * aimSpeed);
     }
 
     public bool GetDamage()
@@ -75,16 +77,14 @@ public class TanksHandler : MonoBehaviour
         hpSlider.value -= damage;
         if (hpSlider.value <= 0)
         {
-            _active = false;
+            _isActive = false;
+            _tanksAudioSource.Stop();
 
-            loseText.text = loseText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", loseScoreImpact.ToString());
-
-            loseCanvas.SetActive(true);
             SoundManager.instance.PlayAudioClip(deadClip, transform, deadClipVolume);
+            SkufHandler.instance.SetText(loseText, hungerImpact.ToString(), loseScoreImpact.ToString());
             SkufHandler.instance.ChangeHunger(-hungerImpact);
             SkufHandler.instance.ChangeScore(-loseScoreImpact);
-
-            _tanksAudioSource.Stop();
+            loseCanvas.SetActive(true);
 
             return true;
         }
@@ -93,17 +93,17 @@ public class TanksHandler : MonoBehaviour
 
     public bool IncreaseScore()
     {
-        SoundManager.instance.PlayAudioClip(enemyDeadClip, transform, enemyDeadClipVolume);
         score += 1;
         scoreText.text = $"{score}/{winScore}";
+        SoundManager.instance.PlayAudioClip(enemyDeadClip, transform, enemyDeadClipVolume);
+
         if (score >= winScore) {
-            _active = false;
+            _isActive = false;
 
-            winText.text = winText.text.Replace("{0}", hungerImpact.ToString()).Replace("{1}", scoreImpact.ToString());
-
-            winCanvas.SetActive(true);
+            SkufHandler.instance.SetText(winText, hungerImpact.ToString(), scoreImpact.ToString());
             SkufHandler.instance.ChangeHunger(-hungerImpact);
             SkufHandler.instance.ChangeScore(scoreImpact);
+            winCanvas.SetActive(true);
 
             return true;
         }

@@ -1,90 +1,125 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TankScript : MonoBehaviour
 {
     [Header("Coefficients")]
-    [Range(0f, 100f)][SerializeField] private float speed;
-    [Range(0f, 100f)][SerializeField] private float cooldown;
     [Range(0, 100)][SerializeField] private int maxDelay;
+    [Range(0, 100)][SerializeField] private float speed;
+    [Range(0, 100)][SerializeField] private float cooldown;
+
 
     [Header("System")]
     [SerializeField] private TanksHandler tanksHandler;
-    [SerializeField] private GameObject aim;
-    [SerializeField] private GameObject shot;
-    [SerializeField] private Transform newPos;
+    [SerializeField] private RectTransform newPos;
     [SerializeField] private Sprite deadSprite;
-
+    [SerializeField] private GameObject shot;
     public static bool _tankActive = true;
-    private bool _isShooting = false;
-    private bool _isDowing = false;
+    private bool _inTrigger = false;
     private bool _canShoot = false;
-    private bool _isShoted = false;
-    private bool _isUping = true;
-    private float offset = 0.4f;
-    private float _time = 0;
-    private Sprite defaultSprite;
-    private Vector3 defaultPos;
-    private float _timer;
+    private bool _isAlive = true;
+    private RectTransform _rectTransform;
+    private Sprite _defaultSprite;
+    private Image _image;
+    private float _defY;
 
 
     private void Start()
     {
-        _tankActive = true;
-        defaultPos = GetComponent<Transform>().position;
-        defaultSprite = GetComponent<Image>().sprite;
-        _timer = Random.Range(0, maxDelay);
+        _rectTransform = GetComponent<RectTransform>();
+        _defY = _rectTransform.anchoredPosition.y;
+
+        _image = GetComponent<Image>();
+        _defaultSprite = _image.sprite;
+
+        StartCoroutine(StartLoop());
     }
 
     private void Update()
     {
-        if (_tankActive)
+        if (Input.GetKeyDown(KeyCode.Space) && _inTrigger && _isAlive)
         {
-            _timer -= Time.deltaTime;
-            if (_timer <= 0)
-            {
-                if (_isUping)
-                {
-                    transform.position = Vector3.Lerp(transform.position, newPos.position, speed * Time.deltaTime);
-                    if (transform.position.y >= newPos.position.y - offset / 5)
-                    {
-                        _isUping = false;
-                        _isDowing = false;
-                        _isShooting = true;
-                    }
-                }
-                else if (_isShooting)
-                {
-                    _time += Time.deltaTime;
-                    if (_time > cooldown)
-                    {
-                        Instantiate(shot, transform.position + new Vector3(0, offset, 0), Quaternion.identity);
-                        _time = 0;
+            Die();
+        }
 
-                        if (tanksHandler.GetDamage()) Stop();
-                    }
-                }
-                else if (_isDowing)
-                {
-                    transform.position = Vector3.Lerp(transform.position, defaultPos, speed * Time.deltaTime);
-                    if (transform.position.y <= defaultPos.y + offset / 5)
-                    {
-                        _isDowing = false;
-                        _isShooting = false;
-                        _isUping = true;
-                        _isShoted = false;
-                        _timer = Random.Range(0, maxDelay);
-                        ChangeSprite();
-                    }
-                }
+        if (!_tankActive)
+        {
+            GetComponent<TankScript>().enabled = false;
+        }
+    }
+
+    private IEnumerator StartLoop()
+    {
+        float timer = Random.Range(2, maxDelay);
+        yield return new WaitForSeconds(timer);
+        if (tanksHandler.tanksCount < tanksHandler.maxTankPerTime){
+            tanksHandler.tanksCount += 1;
+            StartCoroutine(MoveUp());
+        }
+        else
+        {
+            StartCoroutine(StartLoop());
+        }
+    }
+
+    private IEnumerator MoveUp()
+    {
+        if (_isAlive)
+        {
+            while (_rectTransform.anchoredPosition.y < newPos.anchoredPosition.y && _isAlive)
+            {
+                _rectTransform.Translate(Vector2.up * speed * Time.deltaTime);
+                yield return null;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && _canShoot && !_isShoted)
+            _canShoot = true;
+            StartCoroutine(Shoot());
+        }
+    }
+
+    private IEnumerator MoveDown()
+    {
+        while (_rectTransform.anchoredPosition.y > _defY)
+        {
+            _rectTransform.Translate(Vector2.down * speed * Time.deltaTime);
+            yield return null;
+        }
+
+        _isAlive = true;
+        _image.sprite = _defaultSprite;
+        
+        StartCoroutine(StartLoop());
+    }
+
+    private IEnumerator Shoot()
+    {
+        if (_isAlive)
+        {
+            while (_canShoot && _isAlive)
             {
-                Die();
-                if (tanksHandler.IncreaseScore()) Stop();
+                Instantiate(shot, transform.position + new Vector3(0, 0.4f, 0), Quaternion.identity);
+
+                if (tanksHandler.GetDamage())
+                {
+                    Stop();
+                    yield break;
+                }
+                else yield return new WaitForSeconds(cooldown);
             }
         }
+    }
+
+    private void Die()
+    {
+        _isAlive = false;
+        _canShoot = false;
+        _image.sprite = deadSprite;
+        tanksHandler.tanksCount -= 1;
+
+        StartCoroutine(MoveDown());
+        if (tanksHandler.IncreaseScore()) Stop();
+        else StartCoroutine(MoveDown());
     }
 
     private void Stop()
@@ -92,41 +127,13 @@ public class TankScript : MonoBehaviour
         _tankActive = false;
     }
 
-    private void Die()
-    {
-        _isShoted = true;
-        _isUping = false;
-        _isShooting = false;
-        _isDowing = true;
-        ChangeSprite();
-    }
-
-    private void ChangeSprite()
-    {
-        Image Image = GetComponent<Image>();
-        if (Image.sprite == defaultSprite)
-        {
-            Image.sprite = deadSprite;
-        }
-        else
-        {
-            Image.sprite = defaultSprite;
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("aim"))
-        {
-            _canShoot = true;
-        }
+        if (collision.CompareTag("aim")) _inTrigger = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("aim"))
-        {
-            _canShoot = false;
-        }
+        if (collision.CompareTag("aim")) _inTrigger = false;
     }
 }
