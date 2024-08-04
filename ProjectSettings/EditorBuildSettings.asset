@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Zavod.unity
     guid: 72f5036a0b62ec547bab39a568021aa8
   - enabled: 1
-    path: Assets/Scenes/Tanks 1.unity
+    path: Assets/Scenes/Tanks.unity
     guid: 39db5b7b98702fa4e9cb6864f10da8b0
   m_configObjects: {}
